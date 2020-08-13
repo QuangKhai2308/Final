@@ -825,7 +825,8 @@ public class QLBH extends javax.swing.JInternalFrame {
                         ps.clearParameters();
                     }
                     ListDH.clear();
-
+                    fillToForm();
+                    ClearForm();
                 } else {
                     InsertHD();
                     PreparedStatement ps;
@@ -847,30 +848,11 @@ public class QLBH extends javax.swing.JInternalFrame {
                         ps.executeUpdate();
                         ps.clearParameters();
                     }
-//                    String query_SP = "SELECT * FROM SANPHAM WHERE ID_SP = ?";
-//                    String query_UD = "UPDATE SANPHAM SET SOLUONG = ? WHERE ID_SP = ?";
-//                    ResultSet rs;
-//                    int load = 0;
-//                    for (int i = 0; i < ListDH.size(); i++) {
-//                        QLDH x = ListDH.get(i);
-//                        ps = conn.prepareStatement(query_SP);
-//                        ps.setString(1, x.getMaSP());
-//                        rs = ps.executeQuery();
-//                        while (rs.next()) {
-//                            int sl = rs.getInt("SOLUONG");
-//                            load = sl - x.getSoLuong();
-//                        }
-//                        ps = conn.prepareStatement(query_UD);
-//                        ps.setInt(1, load);
-//                        ps.setString(2, x.getMaSP());
-//                        ps.execute();
-//                        load = 0;
-//                        ps.clearParameters();
-//                    }
-//                    JOptionPane.showMessageDialog(this, "Thêm thành công");
+
+                    JOptionPane.showMessageDialog(this, "Thêm thành công");
                     ListDH.clear();
-//                    fillToForm();
-//                    ClearForm();
+                    fillToForm();
+                    ClearForm();
                 }
             } else {
                 JOptionPane.showMessageDialog(this, "Chưa có sản phẩm nào tong giỏ hàng");
@@ -1009,7 +991,6 @@ public class QLBH extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
 //        index = tblListSP.getSelectedRow();
 
-        
         if (ListDH.size() > 0) {
             if (checkNull() && checkSoDT() && checkSo() && checkMaHD()) {
                 if (checkSL()) {
@@ -1030,7 +1011,7 @@ public class QLBH extends javax.swing.JInternalFrame {
                         double GiaSP = Double.parseDouble(txtGiaSP.getText());
                         double GiamGia = Double.parseDouble(txtGiamGia.getText());
                         double ThanhTien = Double.parseDouble(txtThanhTien.getText());
-                        
+
                         QLDH x = ListDH.get(index);
                         int sum = slt + x.getSoLuong() - Integer.valueOf(txtSoLuong.getText());
                         ListDH.set(index, new QLDH(MaSP, NgayMua, MaNV, TenNV, MaKH, TenKH, SDT, MaSP, TenSP,
@@ -1333,7 +1314,7 @@ public class QLBH extends javax.swing.JInternalFrame {
         String parrent = "0\\d{9}";
         String sdt = txtSDT.getText();
         try {
-            Long checkSDT= Long.parseLong(sdt);
+            Long checkSDT = Long.parseLong(sdt);
             if (!txtSDT.getText().matches(parrent)) {
                 JOptionPane.showMessageDialog(this, "Số điện thoại phải gồm 10 chữ số là bắt đầu bằng chữ số 0");
                 txtSDT.requestFocus();

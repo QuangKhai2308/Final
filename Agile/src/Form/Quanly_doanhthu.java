@@ -32,7 +32,7 @@ import org.jfree.data.jdbc.JDBCCategoryDataset;
 public class Quanly_doanhthu extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form Quanly_doanhthu
+     * Creates new form Quanli_doanhthu
      */
     String user = "sa";
     String pass = "123456";
@@ -48,21 +48,8 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
         m();
         y();
         setcolor();
-        
-        model = (DefaultTableModel) tblDays.getModel();
-    }
 
-    protected Connection getConnection() {
-        Connection conn = null;
-        try {
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            conn = DriverManager.getConnection(url, user, pass);
-        } catch (ClassNotFoundException ex) {
-            ex.printStackTrace();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        return conn;
+        model = (DefaultTableModel) tblDays.getModel();
     }
 
     /**
@@ -74,7 +61,6 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane4 = new javax.swing.JScrollPane();
         jPanel8 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -126,8 +112,6 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
         jPanelNam = new javax.swing.JPanel();
 
         setClosable(true);
-        setIconifiable(true);
-        setMaximizable(true);
 
         jPanel6.setBackground(new java.awt.Color(234, 153, 153));
 
@@ -150,7 +134,7 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
         );
         jPaneldaysLayout.setVerticalGroup(
             jPaneldaysLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 239, Short.MAX_VALUE)
+            .addGap(0, 291, Short.MAX_VALUE)
         );
 
         btn1.setText("1");
@@ -244,11 +228,15 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
         Panelimage.setLayout(PanelimageLayout);
         PanelimageLayout.setHorizontalGroup(
             PanelimageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblImageDay, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelimageLayout.createSequentialGroup()
+                .addGap(0, 59, Short.MAX_VALUE)
+                .addComponent(lblImageDay, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         PanelimageLayout.setVerticalGroup(
             PanelimageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblImageDay, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
+            .addGroup(PanelimageLayout.createSequentialGroup()
+                .addComponent(lblImageDay, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 23, Short.MAX_VALUE))
         );
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 19)); // NOI18N
@@ -283,11 +271,11 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
         DaysPanel.setLayout(DaysPanelLayout);
         DaysPanelLayout.setHorizontalGroup(
             DaysPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1)
             .addGroup(DaysPanelLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(DaysPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jPaneldays, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, DaysPanelLayout.createSequentialGroup()
+                .addGroup(DaysPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(DaysPanelLayout.createSequentialGroup()
                         .addComponent(btn1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btn2)
@@ -310,26 +298,26 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btn11)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btn12)))
-                .addGap(96, 96, 96)
+                        .addComponent(btn12)
+                        .addGap(0, 335, Short.MAX_VALUE))
+                    .addComponent(jPaneldays, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
                 .addGroup(DaysPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(DaysPanelLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DaysPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel2)
+                        .addComponent(Panelimage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DaysPanelLayout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblSL, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(DaysPanelLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(Panelimage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(76, 76, 76))
-            .addComponent(jScrollPane1)
+                        .addComponent(lblSL, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         DaysPanelLayout.setVerticalGroup(
             DaysPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(DaysPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(DaysPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(DaysPanelLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DaysPanelLayout.createSequentialGroup()
                         .addGroup(DaysPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btn1)
                             .addComponent(btn2)
@@ -346,30 +334,28 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPaneldays, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(DaysPanelLayout.createSequentialGroup()
+                        .addGap(7, 7, 7)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Panelimage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
                         .addGroup(DaysPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
-                            .addComponent(lblSL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblSL, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(DaysPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 55, Short.MAX_VALUE))
+            .addComponent(DaysPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(DaysPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(DaysPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Ngày", jPanel1);
@@ -491,7 +477,7 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(103, 140, Short.MAX_VALUE))
+                .addGap(103, 270, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -500,7 +486,7 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -510,11 +496,11 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
                             .addComponent(btnt2021))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanelThang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -598,7 +584,7 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 137, Short.MAX_VALUE))
+                .addGap(0, 267, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -616,7 +602,7 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
                     .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -631,8 +617,8 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 984, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1114, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
@@ -641,35 +627,42 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
                 .addGap(22, 22, 22)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 631, Short.MAX_VALUE))
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 599, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 116, Short.MAX_VALUE))
+            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
-
-        jScrollPane4.setViewportView(jPanel8);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 1022, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(0, 1134, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 571, Short.MAX_VALUE)
+            .addGap(0, 684, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         pack();
@@ -679,7 +672,7 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         try {
             String query = "SELECT DAY(NGMUA),SUM(TONGTIEN) FROM HOADON WHERE MONTH(NGMUA) LIKE '1' \n"
-                    + "GROUP BY DAY(NGMUA)";
+            + "GROUP BY DAY(NGMUA)";
             Connection javaconnect = null;
             JDBCCategoryDataset dataset = new JDBCCategoryDataset(ConnecrDb(), query);
             JFreeChart chart = ChartFactory.createLineChart("Doanh Thu Ngày", "Ngày", "Số tiền", dataset, PlotOrientation.VERTICAL, false, true, true);
@@ -694,10 +687,9 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
             jPaneldays.add(chartPanel);
             jPaneldays.validate();
             jPaneldays.repaint();
-            
-            
+
             model.setRowCount(0);
-            
+
             try {
                 String sql = "EXEC result_find ?";
                 PreparedStatement ps = conn.prepareStatement(sql);
@@ -720,14 +712,14 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        loadImageDay();
+
     }//GEN-LAST:event_btn1ActionPerformed
 
     private void btn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn2ActionPerformed
         // Bieu do
         try {
             String query = "SELECT DAY(NGMUA),SUM(TONGTIEN) FROM HOADON WHERE MONTH(NGMUA) LIKE '2' \n"
-                    + "GROUP BY DAY(NGMUA)";
+            + "GROUP BY DAY(NGMUA)";
             Connection javaconnect = null;
             JDBCCategoryDataset dataset = new JDBCCategoryDataset(ConnecrDb(), query);
             JFreeChart chart = ChartFactory.createLineChart("Doanh Thu Ngày", "Ngày", "Số tiền", dataset, PlotOrientation.VERTICAL, false, true, true);
@@ -753,7 +745,7 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
             ps.setString(1, btn2.getText());
             ps.execute();
             ResultSet rs = ps.getResultSet();
-            
+
             tblDays.setDropMode(DropMode.ON);
             while (rs.next()) {
                 Vector vector = new Vector();
@@ -774,7 +766,7 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         try {
             String query = "SELECT DAY(NGMUA),SUM(TONGTIEN) FROM HOADON WHERE MONTH(NGMUA) LIKE '3' \n"
-                    + "GROUP BY DAY(NGMUA)";
+            + "GROUP BY DAY(NGMUA)";
             Connection javaconnect = null;
             JDBCCategoryDataset dataset = new JDBCCategoryDataset(ConnecrDb(), query);
             JFreeChart chart = ChartFactory.createLineChart("Doanh Thu Ngày", "Ngày", "Số tiền", dataset, PlotOrientation.VERTICAL, false, true, true);
@@ -789,18 +781,18 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
             jPaneldays.add(chartPanel);
             jPaneldays.validate();
             jPaneldays.repaint();
-            
+
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
         try {
             String query = "EXEC result_find ?";
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setString(1, btn3.getText());
             ps.execute();
             ResultSet rs = ps.getResultSet();
-            
+
             tblDays.setDropMode(DropMode.ON);
             while (rs.next()) {
                 Vector vector = new Vector();
@@ -821,7 +813,7 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         try {
             String query = "SELECT DAY(NGMUA),SUM(TONGTIEN) FROM HOADON WHERE MONTH(NGMUA) LIKE '4' \n"
-                    + "GROUP BY DAY(NGMUA)";
+            + "GROUP BY DAY(NGMUA)";
             Connection javaconnect = null;
             JDBCCategoryDataset dataset = new JDBCCategoryDataset(ConnecrDb(), query);
             JFreeChart chart = ChartFactory.createLineChart("Doanh Thu Ngày", "Ngày", "Số tiền", dataset, PlotOrientation.VERTICAL, false, true, true);
@@ -839,14 +831,14 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
         try {
             String query = "EXEC result_find ?";
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setString(1, btn4.getText());
             ps.execute();
             ResultSet rs = ps.getResultSet();
-            
+
             tblDays.setDropMode(DropMode.ON);
             while (rs.next()) {
                 Vector vector = new Vector();
@@ -867,7 +859,7 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         try {
             String query = "SELECT DAY(NGMUA),SUM(TONGTIEN) FROM HOADON WHERE MONTH(NGMUA) LIKE '5' \n"
-                    + "GROUP BY DAY(NGMUA)";
+            + "GROUP BY DAY(NGMUA)";
             Connection javaconnect = null;
             JDBCCategoryDataset dataset = new JDBCCategoryDataset(ConnecrDb(), query);
             JFreeChart chart = ChartFactory.createLineChart("Doanh Thu Ngày", "Ngày", "Số tiền", dataset, PlotOrientation.VERTICAL, false, true, true);
@@ -891,7 +883,7 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
             ps.setString(1, btn5.getText());
             ps.execute();
             ResultSet rs = ps.getResultSet();
-            
+
             tblDays.setDropMode(DropMode.ON);
             while (rs.next()) {
                 Vector vector = new Vector();
@@ -912,7 +904,7 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         try {
             String query = "SELECT DAY(NGMUA),SUM(TONGTIEN) FROM HOADON WHERE MONTH(NGMUA) LIKE '6' \n"
-                    + "GROUP BY DAY(NGMUA)";
+            + "GROUP BY DAY(NGMUA)";
             Connection javaconnect = null;
             JDBCCategoryDataset dataset = new JDBCCategoryDataset(ConnecrDb(), query);
             JFreeChart chart = ChartFactory.createLineChart("Doanh Thu Ngày", "Ngày", "Số tiền", dataset, PlotOrientation.VERTICAL, false, true, true);
@@ -936,7 +928,7 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
             ps.setString(1, btn6.getText());
             ps.execute();
             ResultSet rs = ps.getResultSet();
-            
+
             tblDays.setDropMode(DropMode.ON);
             while (rs.next()) {
                 Vector vector = new Vector();
@@ -957,7 +949,7 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         try {
             String query = "SELECT DAY(NGMUA),SUM(TONGTIEN) FROM HOADON WHERE MONTH(NGMUA) LIKE '7' \n"
-                    + "GROUP BY DAY(NGMUA)";
+            + "GROUP BY DAY(NGMUA)";
             Connection javaconnect = null;
             JDBCCategoryDataset dataset = new JDBCCategoryDataset(ConnecrDb(), query);
             JFreeChart chart = ChartFactory.createLineChart("Doanh Thu Ngày", "Ngày", "Số tiền", dataset, PlotOrientation.VERTICAL, false, true, true);
@@ -975,14 +967,14 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
         try {
             String query = "EXEC result_find ?";
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setString(1, btn7.getText());
             ps.execute();
             ResultSet rs = ps.getResultSet();
-            
+
             tblDays.setDropMode(DropMode.ON);
             while (rs.next()) {
                 Vector vector = new Vector();
@@ -1003,7 +995,7 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         try {
             String query = "SELECT DAY(NGMUA),SUM(TONGTIEN) FROM HOADON WHERE MONTH(NGMUA) LIKE '8' \n"
-                    + "GROUP BY DAY(NGMUA)";
+            + "GROUP BY DAY(NGMUA)";
             Connection javaconnect = null;
             JDBCCategoryDataset dataset = new JDBCCategoryDataset(ConnecrDb(), query);
             JFreeChart chart = ChartFactory.createLineChart("Doanh Thu Ngày", "Ngày", "Số tiền", dataset, PlotOrientation.VERTICAL, false, true, true);
@@ -1027,17 +1019,17 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
             ps.setString(1, btn8.getText());
             ps.execute();
             ResultSet rs = ps.getResultSet();
-            
+
             model.setRowCount(0);
-//            while (rs.next()) {
-//                Vector vector = new Vector();
-//                vector.add(rs.getString("DAY(HDCT.NGAYMUA)"));
-//                vector.add(rs.getString());
-//                vector.add(rs.getString());
-//                vector.add(rs.getString());
-//
-//                model.addRow(vector);
-//            }
+            //            while (rs.next()) {
+                //                Vector vector = new Vector();
+                //                vector.add(rs.getString("DAY(HDCT.NGAYMUA)"));
+                //                vector.add(rs.getString());
+                //                vector.add(rs.getString());
+                //                vector.add(rs.getString());
+                //
+                //                model.addRow(vector);
+                //            }
             tblDays.setModel(model);
 
         } catch (Exception e) {
@@ -1049,7 +1041,7 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         try {
             String query = "SELECT DAY(NGMUA),SUM(TONGTIEN) FROM HOADON WHERE MONTH(NGMUA) LIKE '9' \n"
-                    + "GROUP BY DAY(NGMUA)";
+            + "GROUP BY DAY(NGMUA)";
             Connection javaconnect = null;
             JDBCCategoryDataset dataset = new JDBCCategoryDataset(ConnecrDb(), query);
             JFreeChart chart = ChartFactory.createLineChart("Doanh Thu Ngày", "Ngày", "Số tiền", dataset, PlotOrientation.VERTICAL, false, true, true);
@@ -1073,7 +1065,7 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
             ps.setString(1, btn9.getText());
             ps.execute();
             ResultSet rs = ps.getResultSet();
-            
+
             tblDays.setDropMode(DropMode.ON);
             while (rs.next()) {
                 Vector vector = new Vector();
@@ -1094,7 +1086,7 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         try {
             String query = "SELECT DAY(NGMUA),SUM(TONGTIEN) FROM HOADON WHERE MONTH(NGMUA) LIKE '10' \n"
-                    + "GROUP BY DAY(NGMUA)";
+            + "GROUP BY DAY(NGMUA)";
             Connection javaconnect = null;
             JDBCCategoryDataset dataset = new JDBCCategoryDataset(ConnecrDb(), query);
             JFreeChart chart = ChartFactory.createLineChart("Doanh Thu Ngày", "Ngày", "Số tiền", dataset, PlotOrientation.VERTICAL, false, true, true);
@@ -1112,14 +1104,14 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
         try {
             String query = "EXEC result_find ?";
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setString(1, btn10.getText());
             ps.execute();
             ResultSet rs = ps.getResultSet();
-            
+
             tblDays.setDropMode(DropMode.ON);
             while (rs.next()) {
                 Vector vector = new Vector();
@@ -1140,7 +1132,7 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         try {
             String query = "SELECT DAY(NGMUA),SUM(TONGTIEN) FROM HOADON WHERE MONTH(NGMUA) LIKE '11' \n"
-                    + "GROUP BY DAY(NGMUA)";
+            + "GROUP BY DAY(NGMUA)";
             Connection javaconnect = null;
             JDBCCategoryDataset dataset = new JDBCCategoryDataset(ConnecrDb(), query);
             JFreeChart chart = ChartFactory.createLineChart("Doanh Thu Ngày", "Ngày", "Số tiền", dataset, PlotOrientation.VERTICAL, false, true, true);
@@ -1158,14 +1150,14 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
         try {
             String query = "EXEC result_find ?";
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setString(1, btn11.getText());
             ps.execute();
             ResultSet rs = ps.getResultSet();
-            
+
             tblDays.setDropMode(DropMode.ON);
             while (rs.next()) {
                 Vector vector = new Vector();
@@ -1186,7 +1178,7 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         try {
             String query = "SELECT DAY(NGMUA),SUM(TONGTIEN) FROM HOADON WHERE MONTH(NGMUA) LIKE '12' \n"
-                    + "GROUP BY DAY(NGMUA)";
+            + "GROUP BY DAY(NGMUA)";
             Connection javaconnect = null;
             JDBCCategoryDataset dataset = new JDBCCategoryDataset(ConnecrDb(), query);
             JFreeChart chart = ChartFactory.createLineChart("Doanh Thu Ngày", "Ngày", "Số tiền", dataset, PlotOrientation.VERTICAL, false, true, true);
@@ -1204,14 +1196,14 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
         try {
             String query = "EXEC result_find ?";
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setString(1, btn12.getText());
             ps.execute();
             ResultSet rs = ps.getResultSet();
-            
+
             tblDays.setDropMode(DropMode.ON);
             while (rs.next()) {
                 Vector vector = new Vector();
@@ -1232,7 +1224,7 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         try {
             String query = "SELECT MONTH(NGMUA),SUM(TONGTIEN) FROM HOADON WHERE YEAR(NGMUA) LIKE '2018' \n"
-                    + "GROUP BY MONTH(NGMUA)";
+            + "GROUP BY MONTH(NGMUA)";
             Connection javaconnect = null;
             JDBCCategoryDataset dataset = new JDBCCategoryDataset(ConnecrDb(), query);
             JFreeChart chart = ChartFactory.createLineChart("Doanh Thu Tháng", "Tháng", "Số tiền", dataset, PlotOrientation.VERTICAL, false, true, true);
@@ -1256,7 +1248,7 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         try {
             String query = "SELECT MONTH(NGMUA),SUM(TONGTIEN) FROM HOADON WHERE YEAR(NGMUA) LIKE '2019' \n"
-                    + "GROUP BY MONTH(NGMUA)";
+            + "GROUP BY MONTH(NGMUA)";
             Connection javaconnect = null;
             JDBCCategoryDataset dataset = new JDBCCategoryDataset(ConnecrDb(), query);
             JFreeChart chart = ChartFactory.createLineChart("Doanh Thu Tháng", "Tháng", "Số tiền", dataset, PlotOrientation.VERTICAL, false, true, true);
@@ -1279,7 +1271,7 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         try {
             String query = "SELECT MONTH(NGMUA),SUM(TONGTIEN) FROM HOADON WHERE YEAR(NGMUA) LIKE '2020' \n"
-                    + "GROUP BY MONTH(NGMUA)";
+            + "GROUP BY MONTH(NGMUA)";
             Connection javaconnect = null;
             JDBCCategoryDataset dataset = new JDBCCategoryDataset(ConnecrDb(), query);
             JFreeChart chart = ChartFactory.createLineChart("Doanh Thu Tháng", "Tháng", "Số tiền", dataset, PlotOrientation.VERTICAL, false, true, true);
@@ -1302,7 +1294,7 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         try {
             String query = "SELECT MONTH(NGMUA),SUM(TONGTIEN) FROM HOADON WHERE YEAR(NGMUA) LIKE '2021' \n"
-                    + "GROUP BY MONTH(NGMUA)";
+            + "GROUP BY MONTH(NGMUA)";
             Connection javaconnect = null;
             JDBCCategoryDataset dataset = new JDBCCategoryDataset(ConnecrDb(), query);
             JFreeChart chart = ChartFactory.createLineChart("Doanh Thu Tháng", "Tháng", "Số tiền", dataset, PlotOrientation.VERTICAL, false, true, true);
@@ -1320,36 +1312,18 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
             e.printStackTrace();
         }
     }//GEN-LAST:event_btnt2021ActionPerformed
-    protected void loadImageDay() {
-        String query = "SELECT TOP 1 HOADON_CHITIET.ID_SP, SUM(HDCT.SOLUONG), IMAGES FROM HOADON_CHITIET AS HDCT\n"
-                + "INNER JOIN SANPHAM ON HDCT.ID_SP = SANPHAM.ID_SP\n"
-                + "WHERE DAY(NGAYMUA) = DAY(GETDATE())\n"
-                + "GROUP BY HDCT.ID_SP, IMAGES\n"
-                + "ORDER BY SUM(HDCT.SOLUONG) DESC";
-        int w = lblImageDay.getWidth();
-        int h = lblImageDay.getHeight();
+    protected Connection getConnection() {
+        Connection conn = null;
         try {
-            PreparedStatement ps = conn.prepareStatement(query);
-            ResultSet rs = ps.executeQuery();
-
-            while (rs.next()) {
-                String Link = rs.getString(3);
-                ImageIcon icon = new ImageIcon(Link);
-                Image img = icon.getImage();
-                Image new_img = img.getScaledInstance(168, 214, Image.SCALE_SMOOTH);
-                ImageIcon s = new ImageIcon(new_img);
-                lblImageDay.setIcon(s);
-                System.out.println(Link);
-                System.out.println(w);
-                System.out.println(h);
-                lblSL.setText(rs.getInt(2) + "");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            conn = DriverManager.getConnection(url, user, pass);
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
         }
-
+        return conn;
     }
-
     public void d() {
         try {
             String query = "SELECT DAY(NGMUA),SUM(TONGTIEN) FROM HOADON WHERE MONTH(NGMUA) LIKE MONTH(GETDATE()) \n"
@@ -1418,7 +1392,7 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
             e.printStackTrace();
         }
     }
-
+    
     public void setcolor() {
         btn1.setBackground(Color.pink);
         btn2.setBackground(Color.pink);
@@ -1435,7 +1409,7 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
         DaysPanel.setBackground(Color.pink);
 
     }
-
+    
     public Connection ConnecrDb() {
         Connection conn = null;
         String url = "jdbc:sqlserver://localhost:1433;databaseName = QLBH";
@@ -1453,7 +1427,6 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
         }
         return conn;
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel DaysPanel;
     private javax.swing.JPanel Panelimage;
@@ -1497,7 +1470,6 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JLabel lblImageDay;
