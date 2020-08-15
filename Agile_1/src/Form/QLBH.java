@@ -15,8 +15,8 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.sql.Date;
 import java.text.ParseException;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
@@ -657,13 +657,69 @@ public class QLBH extends javax.swing.JInternalFrame {
         cboMauSac.setSelectedIndex(-1);
         cboSize.setSelectedIndex(-1);
         cboTenSP.setSelectedIndex(-1);
-
+        txtMaHD.setText(setMaHD());
+        try {
+            DateBan.setDate(sdf.parse(setDate()));
+        } catch (ParseException ex) {
+            ex.printStackTrace();
+        }
         if (ListDH.size() > 0) {
             ResetSL();
         }
         ListDH.clear();
         fillToForm();
     }//GEN-LAST:event_btnAddActionPerformed
+    protected String setDate() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date();
+        String NgayBan = sdf.format(date);
+        return NgayBan;
+    }
+
+    protected String setMaHD() {
+        String MaHD = "";
+        SimpleDateFormat sdf = new SimpleDateFormat("yyMMdd");
+        Date date = new Date();
+
+        MaHD = sdf.format(date);
+
+        String query = "EXEC Count_mahd ?";
+        int count = 0;
+        try {
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, MaHD);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                count = rs.getInt(1);
+            }
+            boolean check = false;
+
+            do {
+                if (count > 98) {
+                    MaHD = MaHD + (count + 1);
+                } else if (count > 8) {
+                    MaHD = MaHD + "0" + (count + 1);
+                } else {
+                    MaHD = MaHD + "00" + (count + 1);
+                }
+                String sql = "SELECT * FROM HOADON WHERE ID_HD = '" + MaHD + "'";
+                ps = conn.prepareStatement(sql);
+                rs = ps.executeQuery();
+                if (rs.next()) {
+                    check = true;
+                    count++;
+                    MaHD = sdf.format(date);
+                } else {
+                    check = false;
+                }
+            } while (check);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return MaHD;
+    }
+
     protected void ResetSL() {
         String query_UD = "UPDATE SANPHAM SET SOLUONG = ? WHERE ID_SP = ?";
         String query_SE = "SELECT * FROM SANPHAM WHERE ID_SP = ?";
@@ -846,32 +902,20 @@ public class QLBH extends javax.swing.JInternalFrame {
 
                         ps.executeUpdate();
                         ps.clearParameters();
+                        ListDH.clear();
                     }
-//                    String query_SP = "SELECT * FROM SANPHAM WHERE ID_SP = ?";
-//                    String query_UD = "UPDATE SANPHAM SET SOLUONG = ? WHERE ID_SP = ?";
-//                    ResultSet rs;
-//                    int load = 0;
-//                    for (int i = 0; i < ListDH.size(); i++) {
-//                        QLDH x = ListDH.get(i);
-//                        ps = conn.prepareStatement(query_SP);
-//                        ps.setString(1, x.getMaSP());
-//                        rs = ps.executeQuery();
-//                        while (rs.next()) {
-//                            int sl = rs.getInt("SOLUONG");
-//                            load = sl - x.getSoLuong();
-//                        }
-//                        ps = conn.prepareStatement(query_UD);
-//                        ps.setInt(1, load);
-//                        ps.setString(2, x.getMaSP());
-//                        ps.execute();
-//                        load = 0;
-//                        ps.clearParameters();
-//                    }
-//                    JOptionPane.showMessageDialog(this, "Thêm thành công");
-                    ListDH.clear();
-//                    fillToForm();
-//                    ClearForm();
+
                 }
+                JOptionPane.showMessageDialog(this, "Thêm thành công");
+                fillToForm();
+                ClearForm();
+                txtMaHD.setText(setMaHD());
+                try {
+                    DateBan.setDate(sdf.parse(setDate()));
+                } catch (ParseException ex) {
+                    ex.printStackTrace();
+                }
+
             } else {
                 JOptionPane.showMessageDialog(this, "Chưa có sản phẩm nào tong giỏ hàng");
                 return;
@@ -1009,7 +1053,6 @@ public class QLBH extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
 //        index = tblListSP.getSelectedRow();
 
-        
         if (ListDH.size() > 0) {
             if (checkNull() && checkSoDT() && checkSo() && checkMaHD()) {
                 if (checkSL()) {
@@ -1030,7 +1073,7 @@ public class QLBH extends javax.swing.JInternalFrame {
                         double GiaSP = Double.parseDouble(txtGiaSP.getText());
                         double GiamGia = Double.parseDouble(txtGiamGia.getText());
                         double ThanhTien = Double.parseDouble(txtThanhTien.getText());
-                        
+
                         QLDH x = ListDH.get(index);
                         int sum = slt + x.getSoLuong() - Integer.valueOf(txtSoLuong.getText());
                         ListDH.set(index, new QLDH(MaSP, NgayMua, MaNV, TenNV, MaKH, TenKH, SDT, MaSP, TenSP,
@@ -1333,7 +1376,7 @@ public class QLBH extends javax.swing.JInternalFrame {
         String parrent = "0\\d{9}";
         String sdt = txtSDT.getText();
         try {
-            Long checkSDT= Long.parseLong(sdt);
+            Long checkSDT = Long.parseLong(sdt);
             if (!txtSDT.getText().matches(parrent)) {
                 JOptionPane.showMessageDialog(this, "Số điện thoại phải gồm 10 chữ số là bắt đầu bằng chữ số 0");
                 txtSDT.requestFocus();

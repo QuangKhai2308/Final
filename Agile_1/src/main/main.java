@@ -5,6 +5,7 @@
  */
 package main;
 
+import Form.Doanhthu;
 import Form.Forgot;
 import Form.Login;
 import Form.QLBH;
@@ -31,7 +32,7 @@ public class main extends javax.swing.JFrame {
     Thongtin_khachhang tt_kh;
     QLSP qlsp;
     QLBH qlbh;
-    Quanly_doanhthu ql_dt;
+    Doanhthu ql_dt;
     menu_banhang menu;
     Forgot forgot;
 
@@ -251,7 +252,7 @@ public class main extends javax.swing.JFrame {
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
         if (ql_dt == null || ql_dt.isClosed()) {
-            ql_dt = new Quanly_doanhthu();
+            ql_dt = new Doanhthu();
             ql_dt.setLocation(this.getWidth() / 2 - ql_dt.getWidth() / 2, (this.getHeight() - 20) / 2 - ql_dt.getHeight() / 2 - 20);
             Desktop.add(ql_dt);
             ql_dt.setVisible(true);

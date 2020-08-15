@@ -5,6 +5,7 @@
  */
 package Form;
 
+import Controller.DoanhThu;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -14,6 +15,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Vector;
 import javax.swing.DropMode;
 import javax.swing.ImageIcon;
@@ -27,7 +30,7 @@ import org.jfree.data.jdbc.JDBCCategoryDataset;
 
 /**
  *
- * @author ADMIN
+ * @author Administrator
  */
 public class Quanly_doanhthu extends javax.swing.JInternalFrame {
 
@@ -40,6 +43,8 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
     String url = "jdbc:sqlserver://localhost:1433;databaseName = QLBH";
     DefaultTableModel model;
 
+    List<DoanhThu> ListDT = new ArrayList<>();
+
     public Quanly_doanhthu() {
         initComponents();
 
@@ -48,21 +53,9 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
         m();
         y();
         setcolor();
-        
-        model = (DefaultTableModel) tblDays.getModel();
-    }
 
-    protected Connection getConnection() {
-        Connection conn = null;
-        try {
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            conn = DriverManager.getConnection(url, user, pass);
-        } catch (ClassNotFoundException ex) {
-            ex.printStackTrace();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        return conn;
+        ListDT = fetchList();
+        renderList(ListDT);
     }
 
     /**
@@ -96,7 +89,7 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
         btn11 = new javax.swing.JButton();
         btn12 = new javax.swing.JButton();
         Panelimage = new javax.swing.JPanel();
-        lblImageDay = new javax.swing.JLabel();
+        lblImages = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         lblSL = new javax.swing.JLabel();
@@ -150,7 +143,7 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
         );
         jPaneldaysLayout.setVerticalGroup(
             jPaneldaysLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 239, Short.MAX_VALUE)
+            .addGap(0, 291, Short.MAX_VALUE)
         );
 
         btn1.setText("1");
@@ -244,11 +237,11 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
         Panelimage.setLayout(PanelimageLayout);
         PanelimageLayout.setHorizontalGroup(
             PanelimageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblImageDay, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
+            .addComponent(lblImages, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
         );
         PanelimageLayout.setVerticalGroup(
             PanelimageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblImageDay, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
+            .addComponent(lblImages, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
         );
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 19)); // NOI18N
@@ -266,11 +259,11 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Ngày", "Tổng hóa đơn", "Tổng sản phẩm bán", "Tổng tiền"
+                "Ngày", "ID_SP", "Tổng hóa đơn", "Tổng sản phẩm bán", "Tổng tiền"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -283,11 +276,11 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
         DaysPanel.setLayout(DaysPanelLayout);
         DaysPanelLayout.setHorizontalGroup(
             DaysPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1)
             .addGroup(DaysPanelLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(DaysPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jPaneldays, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, DaysPanelLayout.createSequentialGroup()
+                .addGroup(DaysPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(DaysPanelLayout.createSequentialGroup()
                         .addComponent(btn1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btn2)
@@ -310,26 +303,26 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btn11)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btn12)))
-                .addGap(96, 96, 96)
+                        .addComponent(btn12)
+                        .addGap(0, 318, Short.MAX_VALUE))
+                    .addComponent(jPaneldays, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
                 .addGroup(DaysPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(DaysPanelLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DaysPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel2)
+                        .addComponent(Panelimage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DaysPanelLayout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblSL, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(DaysPanelLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(Panelimage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(76, 76, 76))
-            .addComponent(jScrollPane1)
+                        .addComponent(lblSL, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         DaysPanelLayout.setVerticalGroup(
             DaysPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(DaysPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(DaysPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(DaysPanelLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DaysPanelLayout.createSequentialGroup()
                         .addGroup(DaysPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btn1)
                             .addComponent(btn2)
@@ -346,24 +339,24 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPaneldays, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(DaysPanelLayout.createSequentialGroup()
+                        .addGap(7, 7, 7)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Panelimage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
                         .addGroup(DaysPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
-                            .addComponent(lblSL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblSL, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(DaysPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 55, Short.MAX_VALUE))
+            .addComponent(DaysPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -491,7 +484,7 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(103, 140, Short.MAX_VALUE))
+                .addGap(103, 253, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -500,7 +493,7 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -510,11 +503,11 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
                             .addComponent(btnt2021))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanelThang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -598,7 +591,7 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 137, Short.MAX_VALUE))
+                .addGap(0, 250, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -616,7 +609,7 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
                     .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -627,13 +620,14 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(225, 225, 225)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 984, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(225, 225, 225)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1097, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -641,22 +635,21 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
                 .addGap(22, 22, 22)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 631, Short.MAX_VALUE))
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 553, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 116, Short.MAX_VALUE))
+            .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         jScrollPane4.setViewportView(jPanel8);
@@ -665,16 +658,210 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 1022, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(0, 1136, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 1136, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 571, Short.MAX_VALUE)
+            .addGap(0, 653, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 653, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    protected Connection getConnection() {
+        Connection conn = null;
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            conn = DriverManager.getConnection(url, user, pass);
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return conn;
+    }
 
+    protected List<DoanhThu> fetchList() {
+        List<DoanhThu> list = new ArrayList<>();
+        String query_all = "EXEC find_sp_all ?";
+        String query_TOP1 = "EXEC find_sp_all_TOP1 ?";
+        String query_SP = "SELECT * FROM SANPHAM WHERE ID_SP = ?";
+
+        try {
+            PreparedStatement ps = conn.prepareStatement(query_TOP1);
+            ps.setString(1, "");
+            ps.execute();
+            ResultSet rs = ps.getResultSet();
+            String ID_SP = "";
+            int sl = 0;
+            if (rs.next()) {
+                ID_SP = rs.getString("ID_SP");
+                sl = rs.getInt(4);
+            }
+            lblSL.setText(sl + "");
+            System.out.println(ID_SP);
+//            ps.clearParameters();
+
+            String ImageName = "";
+            ps = conn.prepareStatement(query_SP);
+            ps.setString(1, ID_SP);
+            ps.execute();
+            rs = ps.getResultSet();
+            while (rs.next()) {
+                ImageName = rs.getString("IMAGES");
+            }
+
+            try {
+                ImageIcon icon = new ImageIcon(ImageName);
+                Image img = icon.getImage();
+                Image size_img = img.getScaledInstance(300, 300, Image.SCALE_SMOOTH);
+                ImageIcon new_icon = new ImageIcon(size_img);
+                lblImages.setIcon(new_icon);
+                System.out.println("cr:" + lblImages.getWidth());
+                System.out.println("cd:" + lblImages.getHeight());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            System.out.println("ImageName: " + ImageName);
+//            ps.clearParameters();
+
+            ps = conn.prepareStatement(query_all);
+            ps.setString(1, "");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                String Ngay = rs.getString(1);
+                String Ma_SP = rs.getString(2);
+                int SLHD = rs.getInt(3);
+                int TSLB = rs.getInt(4);
+                long TT = rs.getLong(5);
+                list.add(new DoanhThu(Ngay, ID_SP, SLHD, TSLB, TT));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    protected void renderList(List<DoanhThu> st) {
+        model = (DefaultTableModel) tblDays.getModel();
+        model.setRowCount(0);
+
+        for (DoanhThu x : st) {
+            model.addRow(new Object[]{x.getNgayBan(), x.getID_SP(), x.getSumHD(), x.getSumSP(), x.getTongTien()});
+        }
+    }
+
+    public void d() {
+        try {
+            String query = "SELECT DAY(NGMUA),SUM(TONGTIEN) FROM HOADON WHERE MONTH(NGMUA) LIKE MONTH(GETDATE()) \n"
+                    + "GROUP BY DAY(NGMUA)";
+            Connection javaconnect = null;
+            JDBCCategoryDataset dataset = new JDBCCategoryDataset(ConnecrDb(), query);
+            JFreeChart chart = ChartFactory.createLineChart("Doanh Thu Ngày", "Ngày", "Số tiền", dataset, PlotOrientation.VERTICAL, false, true, true);
+
+            CategoryPlot p = chart.getCategoryPlot();
+            p.setRangeGridlinePaint(Color.BLACK);
+
+            ChartPanel chartPanel = new ChartPanel(chart);
+            chartPanel.setPreferredSize(new Dimension(jPaneldays.getWidth(), 321));
+            jPaneldays.removeAll();
+            jPaneldays.setLayout(new CardLayout());
+            jPaneldays.add(chartPanel);
+            jPaneldays.validate();
+            jPaneldays.repaint();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void m() {
+        try {
+            String query = " SELECT MONTH(NGMUA),SUM(TONGTIEN) FROM HOADON WHERE YEAR(NGMUA) LIKE YEAR(GETDATE()) \n"
+                    + "GROUP BY MONTH(NGMUA)";
+            Connection javaconnect = null;
+            JDBCCategoryDataset dataset = new JDBCCategoryDataset(ConnecrDb(), query);
+            JFreeChart chart = ChartFactory.createLineChart("Doanh Thu Tháng", "Tháng", "Số tiền", dataset, PlotOrientation.VERTICAL, false, true, true);
+
+            CategoryPlot p = chart.getCategoryPlot();
+            p.setRangeGridlinePaint(Color.BLACK);
+
+            ChartPanel chartPanel = new ChartPanel(chart);
+            chartPanel.setPreferredSize(new Dimension(jPanelThang.getWidth(), 321));
+            jPanelThang.removeAll();
+            jPanelThang.setLayout(new CardLayout());
+            jPanelThang.add(chartPanel);
+            jPanelThang.validate();
+            jPanelThang.repaint();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void y() {
+        try {
+            String query = "SELECT YEAR(NGMUA),SUM(TONGTIEN) FROM HOADON\n"
+                    + "GROUP BY YEAR(NGMUA)";
+            Connection javaconnect = null;
+            JDBCCategoryDataset dataset = new JDBCCategoryDataset(ConnecrDb(), query);
+            JFreeChart chart = ChartFactory.createLineChart("Doanh Thu Năm", "Năm", "Số tiền", dataset, PlotOrientation.VERTICAL, false, true, true);
+
+            CategoryPlot p = chart.getCategoryPlot();
+            p.setRangeGridlinePaint(Color.BLACK);
+
+            ChartPanel chartPanel = new ChartPanel(chart);
+            chartPanel.setPreferredSize(new Dimension(jPanelNam.getWidth(), 321));
+            jPanelNam.removeAll();
+            jPanelNam.setLayout(new CardLayout());
+            jPanelNam.add(chartPanel);
+            jPanelNam.validate();
+            jPanelNam.repaint();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setcolor() {
+        btn1.setBackground(Color.pink);
+        btn2.setBackground(Color.pink);
+        btn3.setBackground(Color.pink);
+        btn4.setBackground(Color.pink);
+        btn5.setBackground(Color.pink);
+        btn6.setBackground(Color.pink);
+        btn7.setBackground(Color.pink);
+        btn8.setBackground(Color.pink);
+        btn9.setBackground(Color.pink);
+        btn10.setBackground(Color.pink);
+        btn11.setBackground(Color.pink);
+        btn12.setBackground(Color.pink);
+        DaysPanel.setBackground(Color.pink);
+
+    }
+
+    public Connection ConnecrDb() {
+        Connection conn = null;
+        String url = "jdbc:sqlserver://localhost:1433;databaseName = QLBH";
+        try {
+            String dbUsername = "sa", dbPassword = "123456";
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            conn = DriverManager.getConnection(
+                    url,
+                    dbUsername,
+                    dbPassword
+            );
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return conn;
+    }
     private void btn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn1ActionPerformed
         // TODO add your handling code here:
         try {
@@ -694,10 +881,9 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
             jPaneldays.add(chartPanel);
             jPaneldays.validate();
             jPaneldays.repaint();
-            
-            
+
             model.setRowCount(0);
-            
+
             try {
                 String sql = "EXEC result_find ?";
                 PreparedStatement ps = conn.prepareStatement(sql);
@@ -720,7 +906,6 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        loadImageDay();
     }//GEN-LAST:event_btn1ActionPerformed
 
     private void btn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn2ActionPerformed
@@ -753,7 +938,7 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
             ps.setString(1, btn2.getText());
             ps.execute();
             ResultSet rs = ps.getResultSet();
-            
+
             tblDays.setDropMode(DropMode.ON);
             while (rs.next()) {
                 Vector vector = new Vector();
@@ -789,18 +974,18 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
             jPaneldays.add(chartPanel);
             jPaneldays.validate();
             jPaneldays.repaint();
-            
+
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
         try {
             String query = "EXEC result_find ?";
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setString(1, btn3.getText());
             ps.execute();
             ResultSet rs = ps.getResultSet();
-            
+
             tblDays.setDropMode(DropMode.ON);
             while (rs.next()) {
                 Vector vector = new Vector();
@@ -839,14 +1024,14 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
         try {
             String query = "EXEC result_find ?";
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setString(1, btn4.getText());
             ps.execute();
             ResultSet rs = ps.getResultSet();
-            
+
             tblDays.setDropMode(DropMode.ON);
             while (rs.next()) {
                 Vector vector = new Vector();
@@ -891,7 +1076,7 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
             ps.setString(1, btn5.getText());
             ps.execute();
             ResultSet rs = ps.getResultSet();
-            
+
             tblDays.setDropMode(DropMode.ON);
             while (rs.next()) {
                 Vector vector = new Vector();
@@ -936,7 +1121,7 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
             ps.setString(1, btn6.getText());
             ps.execute();
             ResultSet rs = ps.getResultSet();
-            
+
             tblDays.setDropMode(DropMode.ON);
             while (rs.next()) {
                 Vector vector = new Vector();
@@ -975,14 +1160,14 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
         try {
             String query = "EXEC result_find ?";
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setString(1, btn7.getText());
             ps.execute();
             ResultSet rs = ps.getResultSet();
-            
+
             tblDays.setDropMode(DropMode.ON);
             while (rs.next()) {
                 Vector vector = new Vector();
@@ -1027,17 +1212,17 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
             ps.setString(1, btn8.getText());
             ps.execute();
             ResultSet rs = ps.getResultSet();
-            
+
             model.setRowCount(0);
-//            while (rs.next()) {
-//                Vector vector = new Vector();
-//                vector.add(rs.getString("DAY(HDCT.NGAYMUA)"));
-//                vector.add(rs.getString());
-//                vector.add(rs.getString());
-//                vector.add(rs.getString());
-//
-//                model.addRow(vector);
-//            }
+            //            while (rs.next()) {
+            //                Vector vector = new Vector();
+            //                vector.add(rs.getString("DAY(HDCT.NGAYMUA)"));
+            //                vector.add(rs.getString());
+            //                vector.add(rs.getString());
+            //                vector.add(rs.getString());
+            //
+            //                model.addRow(vector);
+            //            }
             tblDays.setModel(model);
 
         } catch (Exception e) {
@@ -1073,7 +1258,7 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
             ps.setString(1, btn9.getText());
             ps.execute();
             ResultSet rs = ps.getResultSet();
-            
+
             tblDays.setDropMode(DropMode.ON);
             while (rs.next()) {
                 Vector vector = new Vector();
@@ -1112,14 +1297,14 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
         try {
             String query = "EXEC result_find ?";
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setString(1, btn10.getText());
             ps.execute();
             ResultSet rs = ps.getResultSet();
-            
+
             tblDays.setDropMode(DropMode.ON);
             while (rs.next()) {
                 Vector vector = new Vector();
@@ -1158,14 +1343,14 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
         try {
             String query = "EXEC result_find ?";
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setString(1, btn11.getText());
             ps.execute();
             ResultSet rs = ps.getResultSet();
-            
+
             tblDays.setDropMode(DropMode.ON);
             while (rs.next()) {
                 Vector vector = new Vector();
@@ -1204,14 +1389,14 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
         try {
             String query = "EXEC result_find ?";
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setString(1, btn12.getText());
             ps.execute();
             ResultSet rs = ps.getResultSet();
-            
+
             tblDays.setDropMode(DropMode.ON);
             while (rs.next()) {
                 Vector vector = new Vector();
@@ -1320,139 +1505,7 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
             e.printStackTrace();
         }
     }//GEN-LAST:event_btnt2021ActionPerformed
-    protected void loadImageDay() {
-        String query = "SELECT TOP 1 HOADON_CHITIET.ID_SP, SUM(HDCT.SOLUONG), IMAGES FROM HOADON_CHITIET AS HDCT\n"
-                + "INNER JOIN SANPHAM ON HDCT.ID_SP = SANPHAM.ID_SP\n"
-                + "WHERE DAY(NGAYMUA) = DAY(GETDATE())\n"
-                + "GROUP BY HDCT.ID_SP, IMAGES\n"
-                + "ORDER BY SUM(HDCT.SOLUONG) DESC";
-        int w = lblImageDay.getWidth();
-        int h = lblImageDay.getHeight();
-        try {
-            PreparedStatement ps = conn.prepareStatement(query);
-            ResultSet rs = ps.executeQuery();
 
-            while (rs.next()) {
-                String Link = rs.getString(3);
-                ImageIcon icon = new ImageIcon(Link);
-                Image img = icon.getImage();
-                Image new_img = img.getScaledInstance(168, 214, Image.SCALE_SMOOTH);
-                ImageIcon s = new ImageIcon(new_img);
-                lblImageDay.setIcon(s);
-                System.out.println(Link);
-                System.out.println(w);
-                System.out.println(h);
-                lblSL.setText(rs.getInt(2) + "");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    public void d() {
-        try {
-            String query = "SELECT DAY(NGMUA),SUM(TONGTIEN) FROM HOADON WHERE MONTH(NGMUA) LIKE MONTH(GETDATE()) \n"
-                    + "GROUP BY DAY(NGMUA)";
-            Connection javaconnect = null;
-            JDBCCategoryDataset dataset = new JDBCCategoryDataset(ConnecrDb(), query);
-            JFreeChart chart = ChartFactory.createLineChart("Doanh Thu Ngày", "Ngày", "Số tiền", dataset, PlotOrientation.VERTICAL, false, true, true);
-
-            CategoryPlot p = chart.getCategoryPlot();
-            p.setRangeGridlinePaint(Color.BLACK);
-
-            ChartPanel chartPanel = new ChartPanel(chart);
-            chartPanel.setPreferredSize(new Dimension(jPaneldays.getWidth(), 321));
-            jPaneldays.removeAll();
-            jPaneldays.setLayout(new CardLayout());
-            jPaneldays.add(chartPanel);
-            jPaneldays.validate();
-            jPaneldays.repaint();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void m() {
-        try {
-            String query = " SELECT MONTH(NGMUA),SUM(TONGTIEN) FROM HOADON WHERE YEAR(NGMUA) LIKE YEAR(GETDATE()) \n"
-                    + "GROUP BY MONTH(NGMUA)";
-            Connection javaconnect = null;
-            JDBCCategoryDataset dataset = new JDBCCategoryDataset(ConnecrDb(), query);
-            JFreeChart chart = ChartFactory.createLineChart("Doanh Thu Tháng", "Tháng", "Số tiền", dataset, PlotOrientation.VERTICAL, false, true, true);
-
-            CategoryPlot p = chart.getCategoryPlot();
-            p.setRangeGridlinePaint(Color.BLACK);
-
-            ChartPanel chartPanel = new ChartPanel(chart);
-            chartPanel.setPreferredSize(new Dimension(jPanelThang.getWidth(), 321));
-            jPanelThang.removeAll();
-            jPanelThang.setLayout(new CardLayout());
-            jPanelThang.add(chartPanel);
-            jPanelThang.validate();
-            jPanelThang.repaint();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void y() {
-        try {
-            String query = "SELECT YEAR(NGMUA),SUM(TONGTIEN) FROM HOADON\n"
-                    + "GROUP BY YEAR(NGMUA)";
-            Connection javaconnect = null;
-            JDBCCategoryDataset dataset = new JDBCCategoryDataset(ConnecrDb(), query);
-            JFreeChart chart = ChartFactory.createLineChart("Doanh Thu Năm", "Năm", "Số tiền", dataset, PlotOrientation.VERTICAL, false, true, true);
-
-            CategoryPlot p = chart.getCategoryPlot();
-            p.setRangeGridlinePaint(Color.BLACK);
-
-            ChartPanel chartPanel = new ChartPanel(chart);
-            chartPanel.setPreferredSize(new Dimension(jPanelNam.getWidth(), 321));
-            jPanelNam.removeAll();
-            jPanelNam.setLayout(new CardLayout());
-            jPanelNam.add(chartPanel);
-            jPanelNam.validate();
-            jPanelNam.repaint();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void setcolor() {
-        btn1.setBackground(Color.pink);
-        btn2.setBackground(Color.pink);
-        btn3.setBackground(Color.pink);
-        btn4.setBackground(Color.pink);
-        btn5.setBackground(Color.pink);
-        btn6.setBackground(Color.pink);
-        btn7.setBackground(Color.pink);
-        btn8.setBackground(Color.pink);
-        btn9.setBackground(Color.pink);
-        btn10.setBackground(Color.pink);
-        btn11.setBackground(Color.pink);
-        btn12.setBackground(Color.pink);
-        DaysPanel.setBackground(Color.pink);
-
-    }
-
-    public Connection ConnecrDb() {
-        Connection conn = null;
-        String url = "jdbc:sqlserver://localhost:1433;databaseName = QLBH";
-        try {
-            String dbUsername = "sa", dbPassword = "123456";
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            conn = DriverManager.getConnection(
-                    url,
-                    dbUsername,
-                    dbPassword
-            );
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return conn;
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel DaysPanel;
@@ -1500,7 +1553,7 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
-    private javax.swing.JLabel lblImageDay;
+    private javax.swing.JLabel lblImages;
     private javax.swing.JLabel lblSL;
     private javax.swing.JTable tblDays;
     private javax.swing.JTable tblMonth;

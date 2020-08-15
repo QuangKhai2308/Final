@@ -577,12 +577,12 @@ public class Signup extends javax.swing.JInternalFrame {
 
     private void btnHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyActionPerformed
         // TODO add your handling code here:
-//        Login lg = new Login();
-//        this.getDesktopPane().add(lg);
-//        lg.setVisible(true);
-//        lg.setLocation(this.getDesktopPane().getWidth() / 2 - lg.getWidth() / 2, (this.getDesktopPane().getHeight()) / 2 - lg.getHeight() / 2);
-//        this.dispose();
-        Clear();
+        Login lg = new Login();
+        this.getDesktopPane().add(lg);
+        lg.setVisible(true);
+        lg.setLocation(this.getDesktopPane().getWidth() / 2 - lg.getWidth() / 2, (this.getDesktopPane().getHeight()) / 2 - lg.getHeight() / 2);
+        this.dispose();
+
     }//GEN-LAST:event_btnHuyActionPerformed
 
     private void showPassMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_showPassMouseClicked

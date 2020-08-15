@@ -24,12 +24,13 @@ public class HoaDon {
     protected double Gia;
     protected double Discount;
     protected double ThanhTien;
+    protected String MaKH;
     protected String TenKH;
     protected String SDT;
     public HoaDon() {
     }
 
-    public HoaDon(int ID_HDCT, String ID_HD, String ID_SP, String Ten_SP, String MauSac, int Size, int SoLuong, Date NgayMua, double Gia, double Discount, double ThanhTien, String TenKH, String SDT) {
+    public HoaDon(int ID_HDCT, String ID_HD, String ID_SP, String Ten_SP, String MauSac, int Size, int SoLuong, Date NgayMua, double Gia, double Discount, double ThanhTien, String MaKH, String TenKH, String SDT) {
         this.ID_HDCT = ID_HDCT;
         this.ID_HD = ID_HD;
         this.ID_SP = ID_SP;
@@ -41,8 +42,17 @@ public class HoaDon {
         this.Gia = Gia;
         this.Discount = Discount;
         this.ThanhTien = ThanhTien;
+        this.MaKH = MaKH;
         this.TenKH = TenKH;
         this.SDT = SDT;
+    }
+
+    public String getMaKH() {
+        return MaKH;
+    }
+
+    public void setMaKH(String MaKH) {
+        this.MaKH = MaKH;
     }
 
     public String getTenKH() {

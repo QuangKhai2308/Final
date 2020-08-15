@@ -17,6 +17,7 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -36,12 +37,14 @@ public class thongtin_hoadon extends javax.swing.JInternalFrame {
     List<HoaDon> ListDH = new ArrayList<>();
     Locale locale = new Locale("en", "EN");
     DecimalFormat dcf = (DecimalFormat) NumberFormat.getNumberInstance(locale);
-
+    int index = 0;
     public thongtin_hoadon() {
         initComponents();
         conn = getConnection();
         ListDH = fetchList();
         RenderList(ListDH);
+        
+        tblListHD.setComponentPopupMenu(SelectTable);
     }
 
     protected Connection getConnection() {
@@ -66,6 +69,9 @@ public class thongtin_hoadon extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        SelectTable = new javax.swing.JPopupMenu();
+        Update = new javax.swing.JMenuItem();
+        Delete = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblListHD = new javax.swing.JTable();
@@ -76,6 +82,19 @@ public class thongtin_hoadon extends javax.swing.JInternalFrame {
         btnAZ = new javax.swing.JButton();
         btnZA = new javax.swing.JButton();
         btnThoat = new javax.swing.JButton();
+
+        Update.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        Update.setText("Sửa");
+        Update.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UpdateActionPerformed(evt);
+            }
+        });
+        SelectTable.add(Update);
+
+        Delete.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        Delete.setText("Xóa");
+        SelectTable.add(Delete);
 
         setClosable(true);
         setIconifiable(true);
@@ -89,42 +108,47 @@ public class thongtin_hoadon extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "ID_HD", "ID_SP", "TENSP", "MAUSAC", "SIZE", "SOLUONG", "NGAYMUA", "GIA", "DISCOUNT", "THANHTIEN", "TENKH", "SDT"
+                "ID_HDCT", "ID_HD", "ID_SP", "TENSP", "MAUSAC", "SIZE", "SOLUONG", "NGAYMUA", "GIA", "DISCOUNT", "THANHTIEN", "MAKH", "TENKH", "SDT"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
+        tblListHD.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(tblListHD);
         if (tblListHD.getColumnModel().getColumnCount() > 0) {
-            tblListHD.getColumnModel().getColumn(0).setMinWidth(50);
+            tblListHD.getColumnModel().getColumn(0).setMinWidth(70);
             tblListHD.getColumnModel().getColumn(0).setPreferredWidth(50);
-            tblListHD.getColumnModel().getColumn(0).setMaxWidth(50);
-            tblListHD.getColumnModel().getColumn(1).setMinWidth(50);
-            tblListHD.getColumnModel().getColumn(1).setMaxWidth(50);
-            tblListHD.getColumnModel().getColumn(2).setMinWidth(130);
-            tblListHD.getColumnModel().getColumn(2).setMaxWidth(130);
-            tblListHD.getColumnModel().getColumn(3).setMinWidth(60);
-            tblListHD.getColumnModel().getColumn(3).setMaxWidth(60);
-            tblListHD.getColumnModel().getColumn(4).setMinWidth(40);
-            tblListHD.getColumnModel().getColumn(4).setMaxWidth(40);
-            tblListHD.getColumnModel().getColumn(5).setMinWidth(70);
-            tblListHD.getColumnModel().getColumn(5).setMaxWidth(70);
-            tblListHD.getColumnModel().getColumn(6).setMinWidth(100);
-            tblListHD.getColumnModel().getColumn(6).setMaxWidth(100);
-            tblListHD.getColumnModel().getColumn(7).setMinWidth(80);
-            tblListHD.getColumnModel().getColumn(7).setMaxWidth(80);
+            tblListHD.getColumnModel().getColumn(0).setMaxWidth(70);
+            tblListHD.getColumnModel().getColumn(1).setMinWidth(90);
+            tblListHD.getColumnModel().getColumn(1).setMaxWidth(90);
+            tblListHD.getColumnModel().getColumn(2).setMinWidth(80);
+            tblListHD.getColumnModel().getColumn(2).setMaxWidth(80);
+            tblListHD.getColumnModel().getColumn(3).setMinWidth(130);
+            tblListHD.getColumnModel().getColumn(3).setMaxWidth(130);
+            tblListHD.getColumnModel().getColumn(4).setMinWidth(70);
+            tblListHD.getColumnModel().getColumn(4).setMaxWidth(70);
+            tblListHD.getColumnModel().getColumn(5).setMinWidth(50);
+            tblListHD.getColumnModel().getColumn(5).setMaxWidth(50);
+            tblListHD.getColumnModel().getColumn(6).setMinWidth(70);
+            tblListHD.getColumnModel().getColumn(6).setMaxWidth(70);
+            tblListHD.getColumnModel().getColumn(7).setMinWidth(90);
+            tblListHD.getColumnModel().getColumn(7).setMaxWidth(90);
             tblListHD.getColumnModel().getColumn(8).setMinWidth(75);
             tblListHD.getColumnModel().getColumn(8).setMaxWidth(75);
-            tblListHD.getColumnModel().getColumn(9).setMinWidth(90);
-            tblListHD.getColumnModel().getColumn(9).setMaxWidth(90);
-            tblListHD.getColumnModel().getColumn(11).setMinWidth(100);
-            tblListHD.getColumnModel().getColumn(11).setMaxWidth(100);
+            tblListHD.getColumnModel().getColumn(9).setMinWidth(75);
+            tblListHD.getColumnModel().getColumn(9).setMaxWidth(75);
+            tblListHD.getColumnModel().getColumn(10).setMinWidth(80);
+            tblListHD.getColumnModel().getColumn(10).setMaxWidth(80);
+            tblListHD.getColumnModel().getColumn(11).setMinWidth(70);
+            tblListHD.getColumnModel().getColumn(11).setMaxWidth(70);
+            tblListHD.getColumnModel().getColumn(13).setMinWidth(90);
+            tblListHD.getColumnModel().getColumn(13).setMaxWidth(90);
         }
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 26)); // NOI18N
@@ -132,7 +156,7 @@ public class thongtin_hoadon extends javax.swing.JInternalFrame {
         jLabel1.setText("Thông tin hóa đơn");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
-        jLabel2.setText("Mã hóa đơn");
+        jLabel2.setText("Tìm kiếm");
 
         txtMaHD.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
@@ -173,26 +197,24 @@ public class thongtin_hoadon extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(123, 123, 123)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnThoat, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(32, 32, 32)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(54, 54, 54)
                         .addComponent(txtMaHD, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnSerach, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnAZ, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnZA, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 890, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(btnZA, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 276, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -211,9 +233,9 @@ public class thongtin_hoadon extends javax.swing.JInternalFrame {
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnSerach, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnZA, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21))
+                .addGap(20, 20, 20))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -236,9 +258,9 @@ public class thongtin_hoadon extends javax.swing.JInternalFrame {
         dcf.applyPattern(patter);
         for (int i = 0; i < hd.size(); i++) {
             HoaDon x = hd.get(i);
-            model.addRow(new Object[]{x.getID_HD(), x.getID_SP(),
+            model.addRow(new Object[]{x.getID_HDCT(), x.getID_HD(), x.getID_SP(),
                 x.getTen_SP(), x.getMauSac(), x.getSize(), x.getSoLuong(), x.getNgayMua(),
-                dcf.format(x.getGia()), dcf.format(x.getDiscount()), dcf.format(x.getThanhTien()), x.getTenKH(), x.getSDT()});
+                dcf.format(x.getGia()), dcf.format(x.getDiscount()), dcf.format(x.getThanhTien()),x.getMaKH(), x.getTenKH(), x.getSDT()});
 
         }
     }
@@ -264,9 +286,10 @@ public class thongtin_hoadon extends javax.swing.JInternalFrame {
                 double Gia = rs.getDouble(9);
                 double Discount = rs.getDouble(10);
                 double ThanhTien = rs.getDouble(11);
-                String TenKH = rs.getNString(12);
-                String SDT = rs.getString(13);
-                ListDH.add(new HoaDon(ID_HDCT, MaHD, TenSP, TenSP, MAUSAC, Size, SoLuong, NgayMua, Gia, Discount, ThanhTien, TenKH, SDT));
+                String MaKH = rs.getString(12);
+                String TenKH = rs.getNString(13);
+                String SDT = rs.getString(14);
+                ListDH.add(new HoaDon(ID_HDCT, MaHD, TenSP, TenSP, MAUSAC, Size, SoLuong, NgayMua, Gia, Discount, ThanhTien, MaKH, TenKH, SDT));
             }
             RenderList(ListDH);
         } catch (Exception e) {
@@ -307,10 +330,29 @@ public class thongtin_hoadon extends javax.swing.JInternalFrame {
         this.dispose();
     }//GEN-LAST:event_btnThoatActionPerformed
 
+    private void UpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateActionPerformed
+        // TODO add your handling code here:
+        index = tblListHD.getSelectedRow();
+        
+        if (index == -1) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn dữ liệu để thực hiện thao tác");
+        } else {
+            int MaHDCT = Integer.valueOf(String.valueOf(tblListHD.getValueAt(index, 0)));
+            
+            UpdateHD update = new UpdateHD(MaHDCT);
+            
+            this.getDesktopPane().add(update);
+            update.setLocation(this.getDesktopPane().getWidth() / 2 - update.getWidth() / 2, (this.getDesktopPane().getHeight()) / 2 - update.getHeight() / 2);
+            update.setVisible(true);
+            System.out.println(MaHDCT);
+            this.dispose();
+        }
+    }//GEN-LAST:event_UpdateActionPerformed
+
     protected List<HoaDon> fetchList() {
         List<HoaDon> list = new ArrayList<>();
 
-        String query = "SELECT HDCT.*, KH.TEN_KH, KH.PHONE FROM HOADON_CHITIET AS"
+        String query = "SELECT HDCT.*, KH.ID_KH, KH.TEN_KH, KH.PHONE FROM HOADON_CHITIET AS"
                 + " HDCT INNER JOIN HOADON AS HD ON HD.ID_HD = HDCT.ID_HD\n"
                 + "INNER JOIN KHACHHANG AS KH ON KH.ID_KH = HD.ID_KH";
 
@@ -333,9 +375,10 @@ public class thongtin_hoadon extends javax.swing.JInternalFrame {
                 double Gia = rs.getDouble(9);
                 double Discount = rs.getDouble(10);
                 double ThanhTien = rs.getDouble(11);
-                String TenKH = rs.getNString(12);
-                String SDT = rs.getString(13);
-                list.add(new HoaDon(ID_HDCT, MaHD, MaSP, TenSP, MAUSAC, Size, SoLuong, NgayMua, Gia, Discount, ThanhTien, TenKH, SDT));
+                String MaKH = rs.getString(12);
+                String TenKH = rs.getNString(13);
+                String SDT = rs.getString(14);
+                list.add(new HoaDon(ID_HDCT, MaHD, MaSP, TenSP, MAUSAC, Size, SoLuong, NgayMua, Gia, Discount, ThanhTien, MaKH, TenKH, SDT));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -343,6 +386,9 @@ public class thongtin_hoadon extends javax.swing.JInternalFrame {
         return list;
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem Delete;
+    private javax.swing.JPopupMenu SelectTable;
+    private javax.swing.JMenuItem Update;
     private javax.swing.JButton btnAZ;
     private javax.swing.JButton btnSerach;
     private javax.swing.JButton btnThoat;
