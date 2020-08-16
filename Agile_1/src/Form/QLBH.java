@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
@@ -25,6 +26,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -338,6 +345,11 @@ public class QLBH extends javax.swing.JInternalFrame {
                 txtGiamGiaFocusLost(evt);
             }
         });
+        txtGiamGia.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtGiamGiaKeyReleased(evt);
+            }
+        });
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel15.setText("Thành tiền");
@@ -474,8 +486,8 @@ public class QLBH extends javax.swing.JInternalFrame {
         });
 
         btnSave.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
-        btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/save.png"))); // NOI18N
-        btnSave.setText("Lưu");
+        btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/pay.png"))); // NOI18N
+        btnSave.setText("Thanh toán");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSaveActionPerformed(evt);
@@ -511,6 +523,7 @@ public class QLBH extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblListSP.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tblListSP.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblListSPMouseClicked(evt);
@@ -556,13 +569,13 @@ public class QLBH extends javax.swing.JInternalFrame {
                                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(btnAdd, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(btnUpdate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(btnXoa, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnSave, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(btnThoat, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(bnTSP, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(bnTSP, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnSave, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(56, 56, 56)
                         .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -570,7 +583,7 @@ public class QLBH extends javax.swing.JInternalFrame {
                         .addComponent(jLabel1)
                         .addGap(20, 20, 20)
                         .addComponent(txtMaHD, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {bnTSP, btnAdd, btnSave, btnThoat, btnUpdate, btnXoa});
@@ -630,6 +643,22 @@ public class QLBH extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    protected void XuatHoaDon(int MaHD) {
+        try {
+//            Hashtable map = new Hashtable();
+//            JasperReport report = JasperCompileManager.compileReport("src/Form/ReportHoaDon.jrxml");
+
+            Hashtable map = new Hashtable();
+            JasperReport report = JasperCompileManager.compileReport("src/Form/ReportHoaDon.jrxml");
+            map.put("ID_HD", MaHD);
+
+            JasperPrint p = JasperFillManager.fillReport(report, map, getConnection());
+            JasperViewer.viewReport(p, false);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     private void txtTenNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTenNVActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTenNVActionPerformed
@@ -767,15 +796,6 @@ public class QLBH extends javax.swing.JInternalFrame {
         return true;
     }
 
-    protected void addKH() {
-        String query = "INSERT INTO KHACHHANG(TEN_KH, PHONE) OUTPUT INSERTED.ID_KH"
-                + "VALUES(?, ?)";
-
-        if (checkMaKH()) {
-
-        }
-    }
-
     protected void InsertKH() {
         String query_KH = "INSERT INTO KHACHHANG(ID_KH, TEN_KH, PHONE)"
                 + "VALUES(?, ?, ?)";
@@ -865,7 +885,7 @@ public class QLBH extends javax.swing.JInternalFrame {
                     for (int i = 0; i < ListDH.size(); i++) {
                         QLDH x = ListDH.get(i);
                         ps = conn.prepareStatement(query_HDCT);
-                        ps.setString(1, x.getMaHD());
+                        ps.setInt(1, x.getMaHD());
                         ps.setString(2, x.getMaSP());
                         ps.setNString(3, x.getTenSP());
                         ps.setNString(4, x.getMauSac());
@@ -880,15 +900,15 @@ public class QLBH extends javax.swing.JInternalFrame {
                         ps.executeUpdate();
                         ps.clearParameters();
                     }
-                    ListDH.clear();
 
+//                    ListDH.clear();
                 } else {
                     InsertHD();
                     PreparedStatement ps;
                     for (int i = 0; i < ListDH.size(); i++) {
                         QLDH x = ListDH.get(i);
                         ps = conn.prepareStatement(query_HDCT);
-                        ps.setString(1, x.getMaHD());
+                        ps.setInt(1, x.getMaHD());
                         ps.setString(2, x.getMaSP());
                         ps.setNString(3, x.getTenSP());
                         ps.setNString(4, x.getMauSac());
@@ -902,11 +922,13 @@ public class QLBH extends javax.swing.JInternalFrame {
 
                         ps.executeUpdate();
                         ps.clearParameters();
-                        ListDH.clear();
+//                        ListDH.clear();
                     }
 
                 }
-                JOptionPane.showMessageDialog(this, "Thêm thành công");
+                JOptionPane.showMessageDialog(this, "Thanh toán thành công");
+                XuatHoaDon(Integer.valueOf(txtMaHD.getText()));
+                ListDH.clear();
                 fillToForm();
                 ClearForm();
                 txtMaHD.setText(setMaHD());
@@ -1058,6 +1080,7 @@ public class QLBH extends javax.swing.JInternalFrame {
                 if (checkSL()) {
                     try {
                         int slt = Integer.parseInt(lblSL.getText().substring(5));
+                        int MaHd = Integer.valueOf(txtMaHD.getText());
                         String NgayMua = sdf.format(DateBan.getDate());
                         String MaNV = cboMaNV.getSelectedItem().toString();
                         String TenNV = txtTenNV.getText();
@@ -1075,18 +1098,67 @@ public class QLBH extends javax.swing.JInternalFrame {
                         double ThanhTien = Double.parseDouble(txtThanhTien.getText());
 
                         QLDH x = ListDH.get(index);
-                        int sum = slt + x.getSoLuong() - Integer.valueOf(txtSoLuong.getText());
-                        ListDH.set(index, new QLDH(MaSP, NgayMua, MaNV, TenNV, MaKH, TenKH, SDT, MaSP, TenSP,
-                                GiaSP, Integer.valueOf(txtSoLuong.getText()), MauSac, GiamGia, Size, ThanhTien));
+                        int sum;
                         String query = "UPDATE SANPHAM SET SOLUONG = ? WHERE ID_SP = ?";
-                        PreparedStatement ps = conn.prepareStatement(query);
-                        ps.setInt(1, sum);
-                        ps.setString(2, x.getMaSP());
-                        ps.execute();
-                        Reset();
+                        String sql = "SELECT * FROM SANPHAM WHERE ID_SP = ?";
+                        PreparedStatement ps;
+                        if (cboMaSP.getSelectedItem().toString().equalsIgnoreCase(x.getMaSP())) {
+                            sum = slt + x.getSoLuong() - Integer.valueOf(txtSoLuong.getText());
+                            ListDH.set(index, new QLDH(MaHd, NgayMua, MaNV, TenNV, MaKH, TenKH, SDT, MaSP, TenSP, GiaSP, SoLuong, MauSac, GiamGia, Size, ThanhTien));
 
-                        JOptionPane.showMessageDialog(this, "Update thành công");
-                        fillToForm();
+                            ps = conn.prepareStatement(query);
+                            ps.setInt(1, sum);
+                            ps.setString(2, x.getMaSP());
+                            ps.execute();
+                            Reset();
+
+                            JOptionPane.showMessageDialog(this, "Update thành công");
+                            fillToForm();
+                            sum = 0;
+                            ps.clearParameters();
+                        } else {
+                            try {
+                                index = tblListSP.getSelectedRow();
+                                String ID_SP = tblListSP.getValueAt(index, 4).toString();
+                                int slb = Integer.valueOf(tblListSP.getValueAt(index, 8).toString());
+                                System.out.println(ID_SP);
+                                ps = conn.prepareStatement(sql);
+                                ps.setString(1, ID_SP);
+
+                                ResultSet rs = ps.executeQuery();
+                                int soluong = 0;
+                                while (rs.next()) {
+                                    soluong = rs.getInt("SOLUONG");
+                                }
+                                sum = soluong + slb;
+
+                                ps = conn.prepareStatement(query);
+                                ps.setInt(1, sum);
+                                ps.setString(2, ID_SP);
+
+                                ps.execute();
+                                ps.clearParameters();
+                            } catch (Exception e) {
+                                JOptionPane.showMessageDialog(this, "Update mã cũ lỗi");
+                                return;
+                            }
+
+                            try {
+                                sum = slt - Integer.valueOf(txtSoLuong.getText());
+                                ps = conn.prepareStatement(query);
+                                ps.setInt(1, sum);
+                                ps.setString(2, cboMaSP.getSelectedItem().toString());
+
+                                ps.execute();
+                                JOptionPane.showMessageDialog(this, "Update thành công");
+                                fillToForm();
+                                ps.clearParameters();
+                            } catch (Exception e) {
+                                JOptionPane.showMessageDialog(this, "Update mã mới lỗi");
+                                return;
+                            }
+
+                        }
 //                        ClearForm();
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -1163,6 +1235,27 @@ public class QLBH extends javax.swing.JInternalFrame {
             txtThanhTien.setText(TT + "");
         }
     }//GEN-LAST:event_txtGiamGiaFocusLost
+
+    private void txtGiamGiaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtGiamGiaKeyReleased
+        // TODO add your handling code here:
+//        try {
+//            if (!txtSoLuong.getText().isEmpty() && checkSo()) {
+//                if (!txtGiaSP.getText().isEmpty()) {
+//                    long discount = Long.valueOf(txtGiamGia.getText());
+//                    long GiaSP = Long.valueOf(txtGiaSP.getText());
+//                    int sl = Integer.valueOf(txtSoLuong.getText());
+//
+//                    txtThanhTien.setText(((GiaSP * sl) - discount) + "");
+//                } else {
+//                    txtThanhTien.setText("");
+//                }
+//            }
+//        } catch (Exception e) {
+//            JOptionPane.showMessageDialog(this, "Giảm giá phải là số nguyên");
+//            txtThanhTien.setText("");
+//            return;
+//        }
+    }//GEN-LAST:event_txtGiamGiaKeyReleased
     protected void fetechMaNV() {
         String query = "SELECT ID_NV FROM NHANVIEN";
 
@@ -1316,7 +1409,7 @@ public class QLBH extends javax.swing.JInternalFrame {
     }
 
     protected QLDH ReadForm() {
-        String MaHD = txtMaHD.getText();
+        int MaHD = Integer.valueOf(txtMaHD.getText());
         String NgayBan = sdf.format(DateBan.getDate());
         String MaNV = cboMaNV.getSelectedItem().toString();
         String TenNV = txtTenNV.getText();
@@ -1336,8 +1429,7 @@ public class QLBH extends javax.swing.JInternalFrame {
         int Size = Integer.parseInt(kt);
         double ThanhTien = Double.parseDouble(txtThanhTien.getText());
 
-        QLDH qlbh = new QLDH(MaHD, NgayBan, MaNV, TenNV, MaKH, TenKH, SDT, MaSP,
-                TenSP, GiaSP, SoLuong, MauSac, Discount, Size, ThanhTien);
+        QLDH qlbh = new QLDH(MaHD, NgayBan, MaNV, TenNV, MaKH, TenKH, SDT, MaSP, TenSP, GiaSP, SoLuong, MauSac, Discount, Size, ThanhTien);
         return qlbh;
     }
 
@@ -1559,7 +1651,7 @@ public class QLBH extends javax.swing.JInternalFrame {
         String txt = "########";
         dcf.applyPattern(txt);
 
-        txtMaHD.setText(x.getMaHD());
+        txtMaHD.setText(x.getMaHD() + "");
         try {
             DateBan.setDate(sdf.parse(x.getNgayBan()));
         } catch (ParseException ex) {

@@ -407,8 +407,11 @@ public class Signup extends javax.swing.JInternalFrame {
 
             int select = jfc.showOpenDialog(this);
             if (select == JFileChooser.APPROVE_OPTION) {
-                patch = jfc.getSelectedFile().getAbsolutePath();
-
+                patch = jfc.getSelectedFile().getName();
+            
+//                String src = "../Agile/Imgaes" + patch;"D:\Github\Final\Agile_1\Images\BalenciagaTrang.jpg"
+//                patch = "../Agile/src/Images/" + patch;
+                System.out.println(patch);
                 ImageIcon icon = new ImageIcon(patch);
                 Image img = icon.getImage();
                 Image new_img = img.getScaledInstance(txtIcon.getWidth(), txtIcon.getHeight(), Image.SCALE_SMOOTH);
@@ -582,6 +585,7 @@ public class Signup extends javax.swing.JInternalFrame {
         lg.setVisible(true);
         lg.setLocation(this.getDesktopPane().getWidth() / 2 - lg.getWidth() / 2, (this.getDesktopPane().getHeight()) / 2 - lg.getHeight() / 2);
         this.dispose();
+//        Clear();
 
     }//GEN-LAST:event_btnHuyActionPerformed
 
@@ -615,8 +619,7 @@ public class Signup extends javax.swing.JInternalFrame {
         txtComfirm.setEchoChar((char) 0);
     }//GEN-LAST:event_showCòmirmMousePressed
     protected void Clear() {
-        Path path = Paths.get("Agile/src/Icons/circle1.png");  
-        patch = "../Agile/src/Icons/circle1.png";
+        patch = "../Agile/src/Icons/" + "circle1.png";
         ImageIcon icon = new ImageIcon(patch);
         System.out.println(patch);
         txtIcon.setIcon(icon);

@@ -14,7 +14,7 @@ import java.sql.Date;
  */
 public class HoaDon {
     protected int ID_HDCT;
-    protected String ID_HD;
+    protected int ID_HD;
     protected String ID_SP;
     protected String Ten_SP;
     protected String MauSac;
@@ -30,7 +30,7 @@ public class HoaDon {
     public HoaDon() {
     }
 
-    public HoaDon(int ID_HDCT, String ID_HD, String ID_SP, String Ten_SP, String MauSac, int Size, int SoLuong, Date NgayMua, double Gia, double Discount, double ThanhTien, String MaKH, String TenKH, String SDT) {
+    public HoaDon(int ID_HDCT, int ID_HD, String ID_SP, String Ten_SP, String MauSac, int Size, int SoLuong, Date NgayMua, double Gia, double Discount, double ThanhTien, String MaKH, String TenKH, String SDT) {
         this.ID_HDCT = ID_HDCT;
         this.ID_HD = ID_HD;
         this.ID_SP = ID_SP;
@@ -81,11 +81,11 @@ public class HoaDon {
         this.ID_HDCT = ID_HDCT;
     }
 
-    public String getID_HD() {
+    public int getID_HD() {
         return ID_HD;
     }
 
-    public void setID_HD(String ID_HD) {
+    public void setID_HD(int ID_HD) {
         this.ID_HD = ID_HD;
     }
 

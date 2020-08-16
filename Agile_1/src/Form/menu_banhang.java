@@ -25,44 +25,49 @@ public class menu_banhang extends javax.swing.JInternalFrame {
      * Creates new form quanly_banhang
      */
     protected ArrayList<SanPham> listSP = new ArrayList<>();
-    protected String dbUser = "sa",dbPass="123456";
+    protected String dbUser = "sa", dbPass = "123456";
     int index = 0;
-    
+
     Connection conn;
+
     public menu_banhang() {
         initComponents();
         conn = getConnection();
+
         listSP = fetchListall();
         renderListall(listSP);
-        
-        listSP = fetchListBalen();
-        renderListBalen(listSP);
-        
-        listSP = fetchListConverse();
-        renderListConverse(listSP);
-        
-        listSP = fetchListMCQueen();
-        renderListMCQueen(listSP);
-        
+
         listSP = fetchListVans();
         renderListVans(listSP);
+
+        listSP = fetchListMCQueen();
+        renderListMCQueen(listSP);
+
+        listSP = fetchListConverse();
+        renderListConverse(listSP);
+
+        listSP = fetchListBalen();
+        renderListBalen(listSP);
+
     }
-    public Connection getConnection(){
+
+    public Connection getConnection() {
         Connection conn = null;
-         String url = "jdbc:sqlserver://localhost:1433;databaseName = QLBH";
+        String url = "jdbc:sqlserver://localhost:1433;databaseName = QLBH";
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             conn = DriverManager.getConnection(
-                url,
-                this.dbUser,
-                this.dbPass
+                    url,
+                    this.dbUser,
+                    this.dbPass
             );
-            
+
         } catch (Exception e) {
             e.printStackTrace();
         }
         return conn;
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -149,6 +154,7 @@ public class menu_banhang extends javax.swing.JInternalFrame {
 
         jTabbedPane1.addTab("All", jPanel2);
 
+        tblVans.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         tblVans.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -181,6 +187,7 @@ public class menu_banhang extends javax.swing.JInternalFrame {
 
         jTabbedPane1.addTab("Vans", jPanel3);
 
+        tblMC.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         tblMC.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -205,6 +212,7 @@ public class menu_banhang extends javax.swing.JInternalFrame {
 
         jTabbedPane1.addTab("MC Queen", jPanel4);
 
+        tblCon.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         tblCon.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -229,6 +237,7 @@ public class menu_banhang extends javax.swing.JInternalFrame {
 
         jTabbedPane1.addTab("Convesres", jPanel5);
 
+        tblBal.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         tblBal.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -438,10 +447,10 @@ public class menu_banhang extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-     protected void renderListall(ArrayList<SanPham> data){
+     protected void renderListall(ArrayList<SanPham> data) {
         DefaultTableModel modelall = (DefaultTableModel) this.tblAll.getModel();
         modelall.setRowCount(0);
-        for(int i =0 ;i < data.size(); i++){
+        for (int i = 0; i < data.size(); i++) {
             SanPham sp = data.get(i);
             modelall.addRow(new Object[]{
                 sp.getID_SP(),
@@ -456,6 +465,7 @@ public class menu_banhang extends javax.swing.JInternalFrame {
             });
         }
     }
+
     protected ArrayList<SanPham> fetchListall() {
         ArrayList<SanPham> list = new ArrayList<SanPham>();
         String query = "SELECT * FROM SANPHAM";
@@ -484,10 +494,11 @@ public class menu_banhang extends javax.swing.JInternalFrame {
         }
         return list;
     }
-    protected void renderListBalen(ArrayList<SanPham> data){
+
+    protected void renderListBalen(ArrayList<SanPham> data) {
         DefaultTableModel modelsneaker = (DefaultTableModel) this.tblBal.getModel();
         modelsneaker.setRowCount(0);
-        for(int i =0 ;i < data.size(); i++){
+        for (int i = 0; i < data.size(); i++) {
             SanPham sp = data.get(i);
             modelsneaker.addRow(new Object[]{
                 sp.getID_SP(),
@@ -502,6 +513,7 @@ public class menu_banhang extends javax.swing.JInternalFrame {
             });
         }
     }
+
     protected ArrayList<SanPham> fetchListBalen() {
         ArrayList<SanPham> list = new ArrayList<SanPham>();
         String query = "SELECT * FROM SANPHAM WHERE LOAI_SP like 'Balenciaga'";
@@ -530,10 +542,11 @@ public class menu_banhang extends javax.swing.JInternalFrame {
         }
         return list;
     }
-    protected void renderListConverse(ArrayList<SanPham> data){
+
+    protected void renderListConverse(ArrayList<SanPham> data) {
         DefaultTableModel modelsneaker = (DefaultTableModel) this.tblCon.getModel();
         modelsneaker.setRowCount(0);
-        for(int i =0 ;i < data.size(); i++){
+        for (int i = 0; i < data.size(); i++) {
             SanPham sp = data.get(i);
             modelsneaker.addRow(new Object[]{
                 sp.getID_SP(),
@@ -548,6 +561,7 @@ public class menu_banhang extends javax.swing.JInternalFrame {
             });
         }
     }
+
     protected ArrayList<SanPham> fetchListConverse() {
         ArrayList<SanPham> list = new ArrayList<SanPham>();
         String query = "SELECT * FROM SANPHAM WHERE LOAI_SP like 'Converse'";
@@ -576,10 +590,11 @@ public class menu_banhang extends javax.swing.JInternalFrame {
         }
         return list;
     }
-    protected void renderListMCQueen(ArrayList<SanPham> data){
+
+    protected void renderListMCQueen(ArrayList<SanPham> data) {
         DefaultTableModel modelsneaker = (DefaultTableModel) this.tblBal.getModel();
         modelsneaker.setRowCount(0);
-        for(int i =0 ;i < data.size(); i++){
+        for (int i = 0; i < data.size(); i++) {
             SanPham sp = data.get(i);
             modelsneaker.addRow(new Object[]{
                 sp.getID_SP(),
@@ -594,6 +609,7 @@ public class menu_banhang extends javax.swing.JInternalFrame {
             });
         }
     }
+
     protected ArrayList<SanPham> fetchListMCQueen() {
         ArrayList<SanPham> list = new ArrayList<SanPham>();
         String query = "SELECT * FROM SANPHAM WHERE LOAI_SP like 'Alexander MC Queen'";
@@ -622,10 +638,11 @@ public class menu_banhang extends javax.swing.JInternalFrame {
         }
         return list;
     }
-    protected void renderListVans(ArrayList<SanPham> data){
+
+    protected void renderListVans(ArrayList<SanPham> data) {
         DefaultTableModel modelsneaker = (DefaultTableModel) this.tblVans.getModel();
         modelsneaker.setRowCount(0);
-        for(int i =0 ;i < data.size(); i++){
+        for (int i = 0; i < data.size(); i++) {
             SanPham sp = data.get(i);
             modelsneaker.addRow(new Object[]{
                 sp.getID_SP(),
@@ -640,6 +657,7 @@ public class menu_banhang extends javax.swing.JInternalFrame {
             });
         }
     }
+
     protected ArrayList<SanPham> fetchListVans() {
         ArrayList<SanPham> list = new ArrayList<SanPham>();
         String query = "SELECT * FROM SANPHAM WHERE LOAI_SP like 'Vans'";

@@ -57,6 +57,25 @@ public class QLSP extends javax.swing.JInternalFrame {
 
     }
 
+    public QLSP(String MaSP) {
+        initComponents();
+        conn = getConnection();
+        ListSP = fetchList();
+        renderForm(ListSP);
+        int x = 0;
+        for (int i = 0; i < ListSP.size(); i++) {
+            SanPham sp = ListSP.get(i);
+            if (sp.getID_SP().equalsIgnoreCase(MaSP)) {
+                index = i;
+                System.out.println(index);
+                tblListSP.setRowSelectionInterval(index, index);
+                ShowDetails();
+                return;
+            }
+
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -425,6 +444,7 @@ public class QLSP extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblListSP.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tblListSP.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblListSPMouseClicked(evt);
@@ -1059,6 +1079,8 @@ public class QLSP extends javax.swing.JInternalFrame {
     }
 
     private void ShowDetails() {
+        double witch = lblImage.getWidth();
+        double heght = lblImage.getHeight();
         String patter = "#######";
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         dcf.applyPattern(patter);
@@ -1078,7 +1100,7 @@ public class QLSP extends javax.swing.JInternalFrame {
         txtSoLuong.setText(sp.getSoLuong() + "");
         cboTrangThai.setSelectedItem(sp.getTrangThai());
         txtLinkAnh.setText(sp.getImage());
-        lblImage.setIcon(new ImageIcon(new ImageIcon(sp.getImage()).getImage().getScaledInstance(lblImage.getWidth(), lblImage.getHeight(), Image.SCALE_SMOOTH)));
+        lblImage.setIcon(new ImageIcon(new ImageIcon(sp.getImage()).getImage().getScaledInstance(this.getWidth(), this.getHeight(), Image.SCALE_SMOOTH)));
         txtTenSP.setEditable(true);
         dateNhap.setEnabled(true);
         txtGiaTien.setEditable(true);

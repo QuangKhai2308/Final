@@ -12,7 +12,7 @@ package Controller;
  * @author Khai2
  */
 public class QLDH {
-    protected String MaHD;
+    protected int MaHD;
     protected String NgayBan;
     protected String MaNV;
     protected String TenNV;
@@ -31,7 +31,7 @@ public class QLDH {
     public QLDH() {
     }
 
-    public QLDH(String MaHD, String NgayBan, String MaNV, String TenNV, String MaKH, String TenKH, String SDT, String MaSP, String TenSP, double GiaSP, int SoLuong, String MauSac, double Discount, int Size, double ThanhTien) {
+    public QLDH(int MaHD, String NgayBan, String MaNV, String TenNV, String MaKH, String TenKH, String SDT, String MaSP, String TenSP, double GiaSP, int SoLuong, String MauSac, double Discount, int Size, double ThanhTien) {
         this.MaHD = MaHD;
         this.NgayBan = NgayBan;
         this.MaNV = MaNV;
@@ -49,11 +49,11 @@ public class QLDH {
         this.ThanhTien = ThanhTien;
     }
 
-    public String getMaHD() {
+    public int getMaHD() {
         return MaHD;
     }
 
-    public void setMaHD(String MaHD) {
+    public void setMaHD(int MaHD) {
         this.MaHD = MaHD;
     }
 

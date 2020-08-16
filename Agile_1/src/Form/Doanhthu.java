@@ -15,6 +15,7 @@ import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 import java.util.Vector;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -34,12 +35,14 @@ public class Doanhthu extends javax.swing.JInternalFrame {
     DefaultTableModel model;
     Locale locale = new Locale("en", "EN");
     DecimalFormat dcf = (DecimalFormat) NumberFormat.getNumberInstance(locale);
-
+    int index;
     public Doanhthu() {
         initComponents();
         conn = getConnection();
         model = (DefaultTableModel) tblDoanhThu.getModel();
         fetchList();
+        
+        tblDoanhThu.setComponentPopupMenu(menuXem);
     }
 
     /**
@@ -51,6 +54,8 @@ public class Doanhthu extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        menuXem = new javax.swing.JPopupMenu();
+        Xem = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         dateNgay = new com.toedter.calendar.JDateChooser();
@@ -59,6 +64,15 @@ public class Doanhthu extends javax.swing.JInternalFrame {
         tblDoanhThu = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         lblDoanhthu = new javax.swing.JLabel();
+
+        Xem.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        Xem.setText("Xem");
+        Xem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                XemActionPerformed(evt);
+            }
+        });
+        menuXem.add(Xem);
 
         jPanel1.setBackground(new java.awt.Color(255, 204, 204));
 
@@ -94,6 +108,7 @@ public class Doanhthu extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblDoanhThu.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(tblDoanhThu);
         if (tblDoanhThu.getColumnModel().getColumnCount() > 0) {
             tblDoanhThu.getColumnModel().getColumn(0).setMinWidth(100);
@@ -254,8 +269,28 @@ public class Doanhthu extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnTKActionPerformed
 
+    private void XemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_XemActionPerformed
+        // TODO add your handling code here:
+        index = tblDoanhThu.getSelectedRow();
+
+        if (index == -1) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn dữ liệu để thực hiện thao tác");
+        } else {
+            String MaSP = String.valueOf(tblDoanhThu.getValueAt(index, 0));
+
+            QLSP qlsp = new QLSP(MaSP);
+
+            this.getDesktopPane().add(qlsp);
+            qlsp.setLocation(this.getDesktopPane().getWidth() / 2 - qlsp.getWidth() / 2, (this.getDesktopPane().getHeight()) / 2 - qlsp.getHeight() / 2);
+            qlsp.setVisible(true);
+            System.out.println(MaSP);
+            this.dispose();
+        }
+    }//GEN-LAST:event_XemActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem Xem;
     private javax.swing.JButton btnTK;
     private com.toedter.calendar.JDateChooser dateNgay;
     private javax.swing.JLabel jLabel1;
@@ -263,6 +298,7 @@ public class Doanhthu extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblDoanhthu;
+    private javax.swing.JPopupMenu menuXem;
     private javax.swing.JTable tblDoanhThu;
     // End of variables declaration//GEN-END:variables
 }

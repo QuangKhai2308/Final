@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="770" pageHeight="842" columnWidth="730" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f27ee1e4-0b21-4f97-b762-9ac69409610f">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="44"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="ID_HD" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[200816001]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     HOADON_CHITIET."ID_HDCT" AS HOADON_CHITIET_ID_HDCT,
+     HOADON_CHITIET."ID_HD" AS HOADON_CHITIET_ID_HD,
+     HOADON_CHITIET."ID_SP" AS HOADON_CHITIET_ID_SP,
+     HOADON_CHITIET."TEN_SP" AS HOADON_CHITIET_TEN_SP,
+     HOADON_CHITIET."MAUSAC" AS HOADON_CHITIET_MAUSAC,
+     HOADON_CHITIET."SIZE" AS HOADON_CHITIET_SIZE,
+     HOADON_CHITIET."SOLUONG" AS HOADON_CHITIET_SOLUONG,
+     HOADON_CHITIET."NGAYMUA" AS HOADON_CHITIET_NGAYMUA,
+     HOADON_CHITIET."GIA" AS HOADON_CHITIET_GIA,
+     HOADON_CHITIET."DISCOUNT" AS HOADON_CHITIET_DISCOUNT,
+     HOADON_CHITIET."THANHTIEN" AS HOADON_CHITIET_THANHTIEN,
+     HOADON."ID_HD" AS HOADON_ID_HD,
+     HOADON."TONGTIEN" AS HOADON_TONGTIEN,
+     KHACHHANG."ID_KH" AS KHACHHANG_ID_KH,
+     KHACHHANG."TEN_KH" AS KHACHHANG_TEN_KH,
+     NHANVIEN."ID_NV" AS NHANVIEN_ID_NV,
+     NHANVIEN."TEN_NV" AS NHANVIEN_TEN_NV,
+     SANPHAM."ID_SP" AS SANPHAM_ID_SP,
+     SANPHAM."TEN_SP" AS SANPHAM_TEN_SP,
+     SANPHAM."LOAI_SP" AS SANPHAM_LOAI_SP,
+     SANPHAM."MAUSAC" AS SANPHAM_MAUSAC,
+     SANPHAM."SIZE" AS SANPHAM_SIZE,
+     SANPHAM."GIABAN" AS SANPHAM_GIABAN
+FROM
+     "dbo"."HOADON" HOADON INNER JOIN "dbo"."HOADON_CHITIET" HOADON_CHITIET ON HOADON."ID_HD" = HOADON_CHITIET."ID_HD"
+     INNER JOIN "dbo"."KHACHHANG" KHACHHANG ON HOADON."ID_KH" = KHACHHANG."ID_KH"
+     INNER JOIN "dbo"."NHANVIEN" NHANVIEN ON HOADON."ID_NV" = NHANVIEN."ID_NV"
+     INNER JOIN "dbo"."SANPHAM" SANPHAM ON HOADON_CHITIET."ID_SP" = SANPHAM."ID_SP"
+WHERE
+     HOADON."ID_HD" = $P{ID_HD}]]>
+	</queryString>
+	<field name="HOADON_CHITIET_ID_HDCT" class="java.lang.Integer"/>
+	<field name="HOADON_CHITIET_ID_HD" class="java.lang.Integer"/>
+	<field name="HOADON_CHITIET_ID_SP" class="java.lang.String"/>
+	<field name="HOADON_CHITIET_TEN_SP" class="java.lang.String"/>
+	<field name="HOADON_CHITIET_MAUSAC" class="java.lang.String"/>
+	<field name="HOADON_CHITIET_SIZE" class="java.lang.Integer"/>
+	<field name="HOADON_CHITIET_SOLUONG" class="java.lang.Integer"/>
+	<field name="HOADON_CHITIET_NGAYMUA" class="java.lang.String"/>
+	<field name="HOADON_CHITIET_GIA" class="java.math.BigDecimal"/>
+	<field name="HOADON_CHITIET_DISCOUNT" class="java.lang.Double"/>
+	<field name="HOADON_CHITIET_THANHTIEN" class="java.math.BigDecimal"/>
+	<field name="HOADON_ID_HD" class="java.lang.Integer"/>
+	<field name="HOADON_TONGTIEN" class="java.math.BigDecimal"/>
+	<field name="KHACHHANG_ID_KH" class="java.lang.String"/>
+	<field name="KHACHHANG_TEN_KH" class="java.lang.String"/>
+	<field name="NHANVIEN_ID_NV" class="java.lang.Integer"/>
+	<field name="NHANVIEN_TEN_NV" class="java.lang.String"/>
+	<field name="SANPHAM_ID_SP" class="java.lang.String"/>
+	<field name="SANPHAM_TEN_SP" class="java.lang.String"/>
+	<field name="SANPHAM_LOAI_SP" class="java.lang.String"/>
+	<field name="SANPHAM_MAUSAC" class="java.lang.String"/>
+	<field name="SANPHAM_SIZE" class="java.lang.Integer"/>
+	<field name="SANPHAM_GIABAN" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="202" y="25" width="351" height="33" uuid="2f3cbc2b-e2ea-4438-9b37-0e63c3fa2a2d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Cambria" size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Hóa Đơn Bán Hàng]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="153" splitType="Stretch">
+			<staticText>
+				<reportElement x="37" y="17" width="96" height="26" uuid="59878ec7-1577-4bee-9383-3a16e292ae9b"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Cambria" size="14"/>
+				</textElement>
+				<text><![CDATA[Mã hóa đơn]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="147" y="17" width="180" height="25" uuid="42d1ee42-223b-4799-8eb8-2674ac98ae8b"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{HOADON_ID_HD}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="388" y="15" width="93" height="26" uuid="ebf43edd-126c-4366-8bb3-fd468c6609f9"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Cambria" size="14"/>
+				</textElement>
+				<text><![CDATA[Ngày mua]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="505" y="15" width="180" height="25" uuid="fed31d2f-cc59-4d75-8440-c04943a6cc37"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{HOADON_CHITIET_NGAYMUA}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="37" y="101" width="96" height="26" uuid="df050bb4-2ee6-40ab-9cbd-97fcf995aff1"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Cambria" size="14"/>
+				</textElement>
+				<text><![CDATA[Mã nhân viên]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="147" y="101" width="180" height="25" uuid="3966fa62-e925-4ab9-a90c-5ea77b0630b6"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NHANVIEN_ID_NV}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="37" y="58" width="96" height="26" uuid="ed9e6a6c-da39-4e94-94f3-b26a9d8b3b33"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Cambria" size="14"/>
+				</textElement>
+				<text><![CDATA[Mã khách hàng]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="147" y="59" width="180" height="25" uuid="18bb275b-26c9-438d-a531-998e01986390"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{KHACHHANG_ID_KH}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="388" y="100" width="93" height="26" uuid="2694747f-ae87-45e4-843b-45df90b77f9d"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Cambria" size="14"/>
+				</textElement>
+				<text><![CDATA[Tên nhân viên]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="505" y="100" width="180" height="25" uuid="751a570f-4d87-48d0-acad-22100461a5c8"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NHANVIEN_TEN_NV}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="388" y="55" width="96" height="26" uuid="b1d025ad-c61b-4d28-8406-0cbd5978d8b1"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Cambria" size="14"/>
+				</textElement>
+				<text><![CDATA[Tên khách hàng]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="505" y="57" width="180" height="25" uuid="e46d4c64-4b46-4b2e-89a0-339a98136f2d"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{KHACHHANG_TEN_KH}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="2" y="148" width="728" height="5" backcolor="#000000" uuid="431f174f-f0e0-4dfd-8234-d2d50a0d575b"/>
+			</line>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="53" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="96" height="26" uuid="0f3abee3-073d-4b04-b385-76fe3f9165c2"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Cambria" size="14"/>
+				</textElement>
+				<text><![CDATA[Mã sản phẩm]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="96" y="0" width="161" height="26" uuid="f01ed66f-3471-4c8b-81a3-15fbc6ad7e5e"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Cambria" size="14"/>
+				</textElement>
+				<text><![CDATA[Tên sản phẩm]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="257" y="0" width="70" height="26" uuid="12621297-0dd9-434f-b673-7f01164c68f8"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Cambria" size="14"/>
+				</textElement>
+				<text><![CDATA[Màu sắc]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="327" y="0" width="48" height="26" uuid="5c2a51b7-89c1-45d1-bb9b-69882d9018a4"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Cambria" size="14"/>
+				</textElement>
+				<text><![CDATA[Size]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="375" y="0" width="57" height="26" uuid="37fc7660-f1ce-4c85-9aec-e159bfb45f4c"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Cambria" size="14"/>
+				</textElement>
+				<text><![CDATA[Số lượng]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="432" y="0" width="94" height="26" uuid="f97b2b8b-6b2a-4e8c-9c86-1a122e5c6c7e"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Cambria" size="14"/>
+				</textElement>
+				<text><![CDATA[Giá sản phẩm]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="526" y="0" width="88" height="26" uuid="191a5083-b267-4377-805c-f318b8da679c"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Cambria" size="14"/>
+				</textElement>
+				<text><![CDATA[Giảm giá]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="614" y="0" width="116" height="26" uuid="48994732-7668-43b9-ae9b-fc054e0cd1b3"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Cambria" size="14"/>
+				</textElement>
+				<text><![CDATA[Thành tiền]]></text>
+			</staticText>
+			<line>
+				<reportElement x="2" y="43" width="728" height="5" backcolor="#000000" uuid="32c05a41-0bcf-47c3-8ece-dae46ee95f0c"/>
+			</line>
+			<line>
+				<reportElement x="2" y="38" width="728" height="5" backcolor="#000000" uuid="40544e83-3127-410b-890f-8efc191c3962"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="76" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="8" width="96" height="25" uuid="b044d5a6-615d-44f2-9b75-638318333ff6"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{HOADON_CHITIET_ID_SP}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="96" y="8" width="161" height="25" uuid="3e6d5d65-01d6-44bb-91fa-18db82a436d0"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{HOADON_CHITIET_TEN_SP}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="257" y="8" width="70" height="25" uuid="b878a97a-563f-445f-ad03-89426136e100"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{HOADON_CHITIET_MAUSAC}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="327" y="8" width="48" height="25" uuid="72db9764-3b6e-4d40-a41e-31257a5c72af"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{HOADON_CHITIET_SIZE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="375" y="8" width="57" height="25" uuid="aff8cbe6-4ff0-4dcf-a29a-57fc931e69ec"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{HOADON_CHITIET_SOLUONG}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="432" y="8" width="94" height="25" uuid="b80ff41e-be4d-4004-9abf-bd4d320ca142"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{HOADON_CHITIET_GIA}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="526" y="8" width="88" height="25" uuid="591611dc-371d-451c-a7d1-83e7243b1d42"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{HOADON_CHITIET_DISCOUNT}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="614" y="8" width="116" height="25" uuid="987e4a88-307d-4a6c-943e-b287d4666561"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{HOADON_CHITIET_THANHTIEN}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="53" width="730" height="5" backcolor="#000000" uuid="5652acdf-c499-42d6-88d9-58acac985d25"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<staticText>
+				<reportElement x="346" y="12" width="86" height="20" uuid="5267f75d-702b-41bf-ac1a-6980c049b883"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tổng tiền]]></text>
+			</staticText>
+			<textField pattern="#,##0">
+				<reportElement x="466" y="12" width="171" height="20" uuid="255e6623-bcbb-494f-bc5f-0c3df75388b2"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{HOADON_TONGTIEN}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

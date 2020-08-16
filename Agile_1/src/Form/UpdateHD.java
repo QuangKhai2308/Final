@@ -5,11 +5,13 @@
  */
 package Form;
 
+import Controller.QLDH;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -27,6 +29,10 @@ public class UpdateHD extends javax.swing.JInternalFrame {
     String pass = "123456";
     Connection conn;
     String url = "jdbc:sqlserver://localhost:1433;databaseName = QLBH";
+    int Ma_HDCT;
+    int soluong;
+    String MaSP;
+    int lblsl;
 
     public UpdateHD(int MaHDCT) {
         initComponents();
@@ -58,10 +64,17 @@ public class UpdateHD extends javax.swing.JInternalFrame {
                 cboMaSP.setSelectedItem(rs.getString(3));
                 txtSoLuong.setText(rs.getInt(7) + "");
                 txtGiamGia.setText(rs.getLong(10) + "");
+                txtThanhTien.setText(rs.getLong(11) + "");
             }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
+        Ma_HDCT = MaHDCT;
+        soluong = Integer.valueOf(txtSoLuong.getText());
+        MaSP = cboMaSP.getSelectedItem().toString();
+        lblsl = Integer.valueOf(lblSL.getText().substring(5));
+
     }
 
     protected Connection getConnection() {
@@ -120,10 +133,10 @@ public class UpdateHD extends javax.swing.JInternalFrame {
     }
 
     private void unEnditable() {
-        txtMaHD.setEditable(true);
+        txtMaHD.setEditable(false);
         DateBan.setEnabled(true);
         cboMaNV.setEnabled(true);
-        txtMaKH.setEditable(true);
+        txtMaKH.setEditable(false);
         txtTenKH.setEditable(true);
         txtSDT.setEnabled(true);
         cboMaSP.setEnabled(true);
@@ -666,7 +679,7 @@ public class UpdateHD extends javax.swing.JInternalFrame {
 
         btnThoat.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         btnThoat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/out.png"))); // NOI18N
-        btnThoat.setText("Thoát");
+        btnThoat.setText("Hủy");
         btnThoat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnThoatActionPerformed(evt);
@@ -698,7 +711,7 @@ public class UpdateHD extends javax.swing.JInternalFrame {
                         .addComponent(jLabel1)
                         .addGap(20, 20, 20)
                         .addComponent(txtMaHD, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(84, Short.MAX_VALUE))
+                .addContainerGap(102, Short.MAX_VALUE))
         );
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnSave, btnThoat});
@@ -806,15 +819,168 @@ public class UpdateHD extends javax.swing.JInternalFrame {
             txtThanhTien.setText(TT + "");
         }
     }//GEN-LAST:event_txtGiamGiaFocusLost
+    protected void updateKH() {
+        String update = "UPDATE KHACHHANG SET TEN_KH = ? , PHONE = ? WHERE ID_KH = ?";
+
+        try {
+            PreparedStatement ps = conn.prepareStatement(update);
+
+            ps.setNString(1, txtTenKH.getText());
+            ps.setString(2, txtSDT.getText());
+            ps.setString(3, txtSDT.getText());
+
+            ps.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Update khách hàng lỗi");
+            return;
+        }
+    }
+
+    protected void updateHD() {
+        String update = "UPDATE HOADON SET ID_NV = ? WHERE ID_HD = ?";
+
+        try {
+            PreparedStatement ps = conn.prepareStatement(update);
+
+            ps.setInt(1, cboMaNV.getSelectedIndex());
+            ps.setString(2, txtMaHD.getText());
+
+            ps.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Lỗi update Hóa đơn");
+            return;
+        }
+    }
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        if (checkNull() && checkSoDT() && checkSo()) {
+            if (lblSL.getText().equalsIgnoreCase("0")) {
+                JOptionPane.showMessageDialog(this, "Sản phẩm này đã hết hàng");
+                return;
+            } else if (checkSL()) {
+                try {
+                    updateKH();
+                    updateHD();
+                    String query_HDCT = "UPDATE HOADON_CHITIET \n"
+                            + "SET ID_HD = ?, ID_SP = ?, TEN_SP = ?, MAUSAC = ?, SIZE = ?, SOLUONG = ?, NGAYMUA = ?, \n"
+                            + "GIA = ?, DISCOUNT = ?, THANHTIEN = ? \n"
+                            + "WHERE ID_HDCT = ?";
+//                    txtMaHD.setEditable(false);
+                    String query_UD = "UPDATE SANPHAM SET SOLUONG = ? WHERE ID_SP = ?";
+                    ResultSet rs;
+                    int load = 0;
+                    PreparedStatement ps = conn.prepareStatement(query_HDCT);
+                    ps.setString(1, txtMaHD.getText());
+                    ps.setString(2, cboMaSP.getSelectedItem().toString());
+                    ps.setNString(3, cboTenSP.getSelectedItem().toString());
+                    ps.setNString(4, cboMauSac.getSelectedItem().toString());
+                    ps.setInt(5, Integer.valueOf(cboSize.getSelectedItem().toString()));
+                    ps.setInt(6, Integer.valueOf(txtSoLuong.getText()));
+                    ps.setString(7, sdf.format(DateBan.getDate()));
+                    ps.setLong(8, Long.valueOf(txtGiaSP.getText()));
+                    ps.setLong(9, Long.valueOf(txtGiamGia.getText()));
+                    ps.setLong(10, Long.valueOf(txtThanhTien.getText()));
+                    ps.setInt(11, Ma_HDCT);
 
+                    ps.execute();
+                    try {
+                        String new_masp = cboMaSP.getSelectedItem().toString();
+                        int sl;
+                        ps = conn.prepareStatement(query_UD);
+                        if (new_masp.equalsIgnoreCase(MaSP)) {
+                            sl = (Integer.valueOf(lblSL.getText().substring(5)) + soluong)
+                                    - Integer.valueOf(txtSoLuong.getText());
+                            ps.setInt(1, sl);
+                            ps.setString(2, cboMaSP.getSelectedItem().toString());
+
+                            ps.execute();
+                        } else {
+                            sl = Integer.valueOf(lblSL.getText().substring(5)) - Integer.valueOf(txtSoLuong.getText());
+                            ps.setInt(1, sl);
+                            ps.setString(2, cboMaSP.getSelectedItem().toString());
+
+                            ps.execute();
+
+                            ps.clearParameters();
+
+                            sl = lblsl + soluong;
+                            ps.setInt(1, sl);
+                            ps.setString(2, MaSP);
+                            ps.execute();
+
+                            ps.clearParameters();
+                        }
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(this, "Lỗi update mã sản phẩm");
+                        return;
+                    }
+
+                    String sql_TT = "SELECT SUM(THANHTIEN) FROM HOADON_CHITIET WHERE ID_HD = ?\n"
+                            + "GROUP BY ID_HD";
+                    String sql_HD_TT = "UPDATE HOADON SET TONGTIEN = ? WHERE ID_HD = ?";
+                    try {
+                        ps = conn.prepareStatement(sql_TT);
+                        ps.setString(1, txtMaHD.getText());
+
+                        rs = ps.executeQuery();
+                        long sum = 0;
+                        while (rs.next()) {
+                            sum = rs.getLong(1);
+                        }
+
+                        ps = conn.prepareStatement(sql_HD_TT);
+                        ps.setLong(1, sum);
+                        ps.setString(2, txtMaHD.getText());
+
+                        ps.execute();
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(this, "Lỗi update thành tiền");
+                        return;
+                    }
+
+                    JOptionPane.showMessageDialog(this, "Update thành công");
+
+                    thongtin_hoadon tt_hd = new thongtin_hoadon();
+
+                    this.getDesktopPane().add(tt_hd);
+                    tt_hd.setLocation(this.getDesktopPane().getWidth() / 2 - tt_hd.getWidth() / 2, (this.getDesktopPane().getHeight()) / 2 - tt_hd.getHeight() / 2);
+                    tt_hd.setVisible(true);
+
+                    this.dispose();
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return;
+                }
+            }
+        }
     }//GEN-LAST:event_btnSaveActionPerformed
+
+    protected boolean checkSL() {
+        int sln = Integer.parseInt(txtSoLuong.getText());
+        int slt = Integer.parseInt(lblSL.getText().substring(5));
+        System.out.println(slt);
+        if (sln > slt) {
+            JOptionPane.showMessageDialog(this, "Số lượng sản phẩm trong kho không đủ");
+            txtSoLuong.requestFocus();
+            return false;
+        }
+        return true;
+    }
 
     private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
         // TODO add your handling code here:
+        thongtin_hoadon tt_hd = new thongtin_hoadon();
 
+        this.getDesktopPane().add(tt_hd);
+        tt_hd.setLocation(this.getDesktopPane().getWidth() / 2 - tt_hd.getWidth() / 2, (this.getDesktopPane().getHeight()) / 2 - tt_hd.getHeight() / 2);
+        tt_hd.setVisible(true);
+
+        this.dispose();
     }//GEN-LAST:event_btnThoatActionPerformed
 
     private void cboMaNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboMaNVActionPerformed

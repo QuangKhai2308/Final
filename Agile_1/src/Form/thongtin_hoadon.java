@@ -38,12 +38,13 @@ public class thongtin_hoadon extends javax.swing.JInternalFrame {
     Locale locale = new Locale("en", "EN");
     DecimalFormat dcf = (DecimalFormat) NumberFormat.getNumberInstance(locale);
     int index = 0;
+
     public thongtin_hoadon() {
         initComponents();
         conn = getConnection();
         ListDH = fetchList();
         RenderList(ListDH);
-        
+
         tblListHD.setComponentPopupMenu(SelectTable);
     }
 
@@ -94,6 +95,11 @@ public class thongtin_hoadon extends javax.swing.JInternalFrame {
 
         Delete.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         Delete.setText("Xóa");
+        Delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteActionPerformed(evt);
+            }
+        });
         SelectTable.add(Delete);
 
         setClosable(true);
@@ -260,7 +266,7 @@ public class thongtin_hoadon extends javax.swing.JInternalFrame {
             HoaDon x = hd.get(i);
             model.addRow(new Object[]{x.getID_HDCT(), x.getID_HD(), x.getID_SP(),
                 x.getTen_SP(), x.getMauSac(), x.getSize(), x.getSoLuong(), x.getNgayMua(),
-                dcf.format(x.getGia()), dcf.format(x.getDiscount()), dcf.format(x.getThanhTien()),x.getMaKH(), x.getTenKH(), x.getSDT()});
+                dcf.format(x.getGia()), dcf.format(x.getDiscount()), dcf.format(x.getThanhTien()), x.getMaKH(), x.getTenKH(), x.getSDT()});
 
         }
     }
@@ -276,7 +282,7 @@ public class thongtin_hoadon extends javax.swing.JInternalFrame {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 int ID_HDCT = rs.getInt(1);
-                String MaHD = rs.getString(2);
+                int MaHD = rs.getInt(2);
                 String MaSP = rs.getString(3);
                 String TenSP = rs.getNString(4);
                 String MAUSAC = rs.getNString(5);
@@ -289,7 +295,7 @@ public class thongtin_hoadon extends javax.swing.JInternalFrame {
                 String MaKH = rs.getString(12);
                 String TenKH = rs.getNString(13);
                 String SDT = rs.getString(14);
-                ListDH.add(new HoaDon(ID_HDCT, MaHD, TenSP, TenSP, MAUSAC, Size, SoLuong, NgayMua, Gia, Discount, ThanhTien, MaKH, TenKH, SDT));
+                ListDH.add(new HoaDon(ID_HDCT, MaHD, MaSP, TenSP, MAUSAC, Size, SoLuong, NgayMua, Gia, Discount, ThanhTien, MaKH, TenKH, SDT));
             }
             RenderList(ListDH);
         } catch (Exception e) {
@@ -333,14 +339,14 @@ public class thongtin_hoadon extends javax.swing.JInternalFrame {
     private void UpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateActionPerformed
         // TODO add your handling code here:
         index = tblListHD.getSelectedRow();
-        
+
         if (index == -1) {
             JOptionPane.showMessageDialog(this, "Vui lòng chọn dữ liệu để thực hiện thao tác");
         } else {
             int MaHDCT = Integer.valueOf(String.valueOf(tblListHD.getValueAt(index, 0)));
-            
+
             UpdateHD update = new UpdateHD(MaHDCT);
-            
+
             this.getDesktopPane().add(update);
             update.setLocation(this.getDesktopPane().getWidth() / 2 - update.getWidth() / 2, (this.getDesktopPane().getHeight()) / 2 - update.getHeight() / 2);
             update.setVisible(true);
@@ -348,6 +354,88 @@ public class thongtin_hoadon extends javax.swing.JInternalFrame {
             this.dispose();
         }
     }//GEN-LAST:event_UpdateActionPerformed
+
+    private void DeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteActionPerformed
+        // TODO add your handling code here:
+        index = tblListHD.getSelectedRow();
+
+        if (index == -1) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn dữ liệu để thực hiện thao tác");
+        } else {
+            int MaHDCT = Integer.valueOf(String.valueOf(tblListHD.getValueAt(index, 0)));
+
+            String query = "DELETE FROM HOADON_CHITIET WHERE ID_HDCT = ?";
+            String sql_1 = "SELECT * FROM HOADON_CHITIET WHERE ID_HDCT = ?";
+            String sql_2 = "SELECT * FROM HOADON_CHITIET WHERE ID_HD = ?";
+            String sql_3 = "DELETE FROM HOADON WHERE ID_HD = ?";
+            String sql_4 = "SELECT * FROM HOADON WHERE ID_HD = ?";
+            String sql_5 = "UPDATE HOADON SET TONGTIEN = ? WHERE ID_HD = ?";
+            
+             try {
+                String MaHD = null;
+                long TT = 0;
+                long sum = 0;
+                PreparedStatement ps = conn.prepareStatement(sql_1);
+                ps.setInt(1, MaHDCT);
+                ResultSet rs = ps.executeQuery();
+                while (rs.next()) {
+                    MaHD = rs.getString("ID_HD");
+                    TT = rs.getLong("THANHTIEN");
+                }
+                 System.out.println(TT);
+                ps.clearParameters();
+
+                ps = conn.prepareStatement(sql_2);
+                ps.setString(1, MaHD);
+
+                rs = ps.executeQuery();
+                int i = 0;
+                while (rs.next()) {
+                    i++;
+                }
+                 System.out.println(i);
+                if (i < 2) {
+                    ps = conn.prepareStatement(query);
+
+                    ps.setInt(1, MaHDCT);
+                    ps.execute();
+                    ps.clearParameters();
+                    
+                    ps = conn.prepareStatement(sql_3);
+                    ps.setString(1, MaHD);
+                    ps.execute();
+                } else {
+                    ps = conn.prepareStatement(sql_4);
+                    ps.setString(1, MaHD);
+                    
+                    rs = ps.executeQuery();
+                    while(rs.next()) {
+                        sum = rs.getLong("TONGTIEN");
+                    }
+                    System.out.println(sum);
+                    ps.clearParameters();
+                    
+                    ps = conn.prepareStatement(sql_5);
+                    ps.setLong(1, (sum - TT));
+                    ps.setString(2, MaHD);
+                    
+                    ps.execute();
+                    
+                    ps = conn.prepareStatement(query);
+
+                    ps.setInt(1, MaHDCT);
+                    ps.execute();
+                    ps.clearParameters();
+                }
+
+                ListDH = fetchList();
+                RenderList(ListDH);
+                JOptionPane.showMessageDialog(this, "Xóa thành công");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }//GEN-LAST:event_DeleteActionPerformed
 
     protected List<HoaDon> fetchList() {
         List<HoaDon> list = new ArrayList<>();
@@ -365,7 +453,7 @@ public class thongtin_hoadon extends javax.swing.JInternalFrame {
 //                + "HOADON_CHITIET.DISCOUNT, HOADON.TONGTIEN
             while (rs.next()) {
                 int ID_HDCT = rs.getInt(1);
-                String MaHD = rs.getString(2);
+                int MaHD = rs.getInt(2);
                 String MaSP = rs.getString(3);
                 String TenSP = rs.getNString(4);
                 String MAUSAC = rs.getNString(5);

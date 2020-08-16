@@ -21,12 +21,12 @@ import java.util.Vector;
 import javax.swing.DropMode;
 import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
-import org.jfree.chart.ChartFactory;
-import org.jfree.chart.ChartPanel;
-import org.jfree.chart.JFreeChart;
-import org.jfree.chart.plot.CategoryPlot;
-import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.data.jdbc.JDBCCategoryDataset;
+//import org.jfree.chart.ChartFactory;
+//import org.jfree.chart.ChartPanel;
+//import org.jfree.chart.JFreeChart;
+//import org.jfree.chart.plot.CategoryPlot;
+//import org.jfree.chart.plot.PlotOrientation;
+//import org.jfree.data.jdbc.JDBCCategoryDataset;
 
 /**
  *
@@ -49,10 +49,10 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
         initComponents();
 
         conn = getConnection();
-        d();
-        m();
-        y();
-        setcolor();
+//        d();
+//        m();
+//        y();
+//        setcolor();
 
         ListDT = fetchList();
         renderList(ListDT);
@@ -759,751 +759,751 @@ public class Quanly_doanhthu extends javax.swing.JInternalFrame {
         }
     }
 
-    public void d() {
-        try {
-            String query = "SELECT DAY(NGMUA),SUM(TONGTIEN) FROM HOADON WHERE MONTH(NGMUA) LIKE MONTH(GETDATE()) \n"
-                    + "GROUP BY DAY(NGMUA)";
-            Connection javaconnect = null;
-            JDBCCategoryDataset dataset = new JDBCCategoryDataset(ConnecrDb(), query);
-            JFreeChart chart = ChartFactory.createLineChart("Doanh Thu Ngày", "Ngày", "Số tiền", dataset, PlotOrientation.VERTICAL, false, true, true);
-
-            CategoryPlot p = chart.getCategoryPlot();
-            p.setRangeGridlinePaint(Color.BLACK);
-
-            ChartPanel chartPanel = new ChartPanel(chart);
-            chartPanel.setPreferredSize(new Dimension(jPaneldays.getWidth(), 321));
-            jPaneldays.removeAll();
-            jPaneldays.setLayout(new CardLayout());
-            jPaneldays.add(chartPanel);
-            jPaneldays.validate();
-            jPaneldays.repaint();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void m() {
-        try {
-            String query = " SELECT MONTH(NGMUA),SUM(TONGTIEN) FROM HOADON WHERE YEAR(NGMUA) LIKE YEAR(GETDATE()) \n"
-                    + "GROUP BY MONTH(NGMUA)";
-            Connection javaconnect = null;
-            JDBCCategoryDataset dataset = new JDBCCategoryDataset(ConnecrDb(), query);
-            JFreeChart chart = ChartFactory.createLineChart("Doanh Thu Tháng", "Tháng", "Số tiền", dataset, PlotOrientation.VERTICAL, false, true, true);
-
-            CategoryPlot p = chart.getCategoryPlot();
-            p.setRangeGridlinePaint(Color.BLACK);
-
-            ChartPanel chartPanel = new ChartPanel(chart);
-            chartPanel.setPreferredSize(new Dimension(jPanelThang.getWidth(), 321));
-            jPanelThang.removeAll();
-            jPanelThang.setLayout(new CardLayout());
-            jPanelThang.add(chartPanel);
-            jPanelThang.validate();
-            jPanelThang.repaint();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void y() {
-        try {
-            String query = "SELECT YEAR(NGMUA),SUM(TONGTIEN) FROM HOADON\n"
-                    + "GROUP BY YEAR(NGMUA)";
-            Connection javaconnect = null;
-            JDBCCategoryDataset dataset = new JDBCCategoryDataset(ConnecrDb(), query);
-            JFreeChart chart = ChartFactory.createLineChart("Doanh Thu Năm", "Năm", "Số tiền", dataset, PlotOrientation.VERTICAL, false, true, true);
-
-            CategoryPlot p = chart.getCategoryPlot();
-            p.setRangeGridlinePaint(Color.BLACK);
-
-            ChartPanel chartPanel = new ChartPanel(chart);
-            chartPanel.setPreferredSize(new Dimension(jPanelNam.getWidth(), 321));
-            jPanelNam.removeAll();
-            jPanelNam.setLayout(new CardLayout());
-            jPanelNam.add(chartPanel);
-            jPanelNam.validate();
-            jPanelNam.repaint();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void setcolor() {
-        btn1.setBackground(Color.pink);
-        btn2.setBackground(Color.pink);
-        btn3.setBackground(Color.pink);
-        btn4.setBackground(Color.pink);
-        btn5.setBackground(Color.pink);
-        btn6.setBackground(Color.pink);
-        btn7.setBackground(Color.pink);
-        btn8.setBackground(Color.pink);
-        btn9.setBackground(Color.pink);
-        btn10.setBackground(Color.pink);
-        btn11.setBackground(Color.pink);
-        btn12.setBackground(Color.pink);
-        DaysPanel.setBackground(Color.pink);
-
-    }
-
-    public Connection ConnecrDb() {
-        Connection conn = null;
-        String url = "jdbc:sqlserver://localhost:1433;databaseName = QLBH";
-        try {
-            String dbUsername = "sa", dbPassword = "123456";
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            conn = DriverManager.getConnection(
-                    url,
-                    dbUsername,
-                    dbPassword
-            );
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return conn;
-    }
+//    public void d() {
+//        try {
+//            String query = "SELECT DAY(NGMUA),SUM(TONGTIEN) FROM HOADON WHERE MONTH(NGMUA) LIKE MONTH(GETDATE()) \n"
+//                    + "GROUP BY DAY(NGMUA)";
+//            Connection javaconnect = null;
+//            JDBCCategoryDataset dataset = new JDBCCategoryDataset(ConnecrDb(), query);
+//            JFreeChart chart = ChartFactory.createLineChart("Doanh Thu Ngày", "Ngày", "Số tiền", dataset, PlotOrientation.VERTICAL, false, true, true);
+//
+//            CategoryPlot p = chart.getCategoryPlot();
+//            p.setRangeGridlinePaint(Color.BLACK);
+//
+//            ChartPanel chartPanel = new ChartPanel(chart);
+//            chartPanel.setPreferredSize(new Dimension(jPaneldays.getWidth(), 321));
+//            jPaneldays.removeAll();
+//            jPaneldays.setLayout(new CardLayout());
+//            jPaneldays.add(chartPanel);
+//            jPaneldays.validate();
+//            jPaneldays.repaint();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
+//
+//    public void m() {
+//        try {
+//            String query = " SELECT MONTH(NGMUA),SUM(TONGTIEN) FROM HOADON WHERE YEAR(NGMUA) LIKE YEAR(GETDATE()) \n"
+//                    + "GROUP BY MONTH(NGMUA)";
+//            Connection javaconnect = null;
+//            JDBCCategoryDataset dataset = new JDBCCategoryDataset(ConnecrDb(), query);
+//            JFreeChart chart = ChartFactory.createLineChart("Doanh Thu Tháng", "Tháng", "Số tiền", dataset, PlotOrientation.VERTICAL, false, true, true);
+//
+//            CategoryPlot p = chart.getCategoryPlot();
+//            p.setRangeGridlinePaint(Color.BLACK);
+//
+//            ChartPanel chartPanel = new ChartPanel(chart);
+//            chartPanel.setPreferredSize(new Dimension(jPanelThang.getWidth(), 321));
+//            jPanelThang.removeAll();
+//            jPanelThang.setLayout(new CardLayout());
+//            jPanelThang.add(chartPanel);
+//            jPanelThang.validate();
+//            jPanelThang.repaint();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
+//
+//    public void y() {
+//        try {
+//            String query = "SELECT YEAR(NGMUA),SUM(TONGTIEN) FROM HOADON\n"
+//                    + "GROUP BY YEAR(NGMUA)";
+//            Connection javaconnect = null;
+//            JDBCCategoryDataset dataset = new JDBCCategoryDataset(ConnecrDb(), query);
+//            JFreeChart chart = ChartFactory.createLineChart("Doanh Thu Năm", "Năm", "Số tiền", dataset, PlotOrientation.VERTICAL, false, true, true);
+//
+//            CategoryPlot p = chart.getCategoryPlot();
+//            p.setRangeGridlinePaint(Color.BLACK);
+//
+//            ChartPanel chartPanel = new ChartPanel(chart);
+//            chartPanel.setPreferredSize(new Dimension(jPanelNam.getWidth(), 321));
+//            jPanelNam.removeAll();
+//            jPanelNam.setLayout(new CardLayout());
+//            jPanelNam.add(chartPanel);
+//            jPanelNam.validate();
+//            jPanelNam.repaint();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
+//
+//    public void setcolor() {
+//        btn1.setBackground(Color.pink);
+//        btn2.setBackground(Color.pink);
+//        btn3.setBackground(Color.pink);
+//        btn4.setBackground(Color.pink);
+//        btn5.setBackground(Color.pink);
+//        btn6.setBackground(Color.pink);
+//        btn7.setBackground(Color.pink);
+//        btn8.setBackground(Color.pink);
+//        btn9.setBackground(Color.pink);
+//        btn10.setBackground(Color.pink);
+//        btn11.setBackground(Color.pink);
+//        btn12.setBackground(Color.pink);
+//        DaysPanel.setBackground(Color.pink);
+//
+//    }
+//
+//    public Connection ConnecrDb() {
+//        Connection conn = null;
+//        String url = "jdbc:sqlserver://localhost:1433;databaseName = QLBH";
+//        try {
+//            String dbUsername = "sa", dbPassword = "123456";
+//            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+//            conn = DriverManager.getConnection(
+//                    url,
+//                    dbUsername,
+//                    dbPassword
+//            );
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return conn;
+//    }
     private void btn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn1ActionPerformed
         // TODO add your handling code here:
-        try {
-            String query = "SELECT DAY(NGMUA),SUM(TONGTIEN) FROM HOADON WHERE MONTH(NGMUA) LIKE '1' \n"
-                    + "GROUP BY DAY(NGMUA)";
-            Connection javaconnect = null;
-            JDBCCategoryDataset dataset = new JDBCCategoryDataset(ConnecrDb(), query);
-            JFreeChart chart = ChartFactory.createLineChart("Doanh Thu Ngày", "Ngày", "Số tiền", dataset, PlotOrientation.VERTICAL, false, true, true);
-
-            CategoryPlot p = chart.getCategoryPlot();
-            p.setRangeGridlinePaint(Color.BLACK);
-
-            ChartPanel chartPanel = new ChartPanel(chart);
-            chartPanel.setPreferredSize(new Dimension(jPaneldays.getWidth(), 321));
-            jPaneldays.removeAll();
-            jPaneldays.setLayout(new CardLayout());
-            jPaneldays.add(chartPanel);
-            jPaneldays.validate();
-            jPaneldays.repaint();
-
-            model.setRowCount(0);
-
-            try {
-                String sql = "EXEC result_find ?";
-                PreparedStatement ps = conn.prepareStatement(sql);
-                ps.setString(1, btn1.getText());
-                ps.execute();
-                ResultSet rs = ps.getResultSet();
-                while (rs.next()) {
-                    Vector vector = new Vector();
-                    vector.add(rs.getString(1));
-                    vector.add(rs.getString(2));
-                    vector.add(rs.getString(3));
-                    vector.add(rs.getString(4));
-
-                    model.addRow(vector);
-                }
-                tblDays.setModel(model);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            String query = "SELECT DAY(NGMUA),SUM(TONGTIEN) FROM HOADON WHERE MONTH(NGMUA) LIKE '1' \n"
+//                    + "GROUP BY DAY(NGMUA)";
+//            Connection javaconnect = null;
+//            JDBCCategoryDataset dataset = new JDBCCategoryDataset(ConnecrDb(), query);
+//            JFreeChart chart = ChartFactory.createLineChart("Doanh Thu Ngày", "Ngày", "Số tiền", dataset, PlotOrientation.VERTICAL, false, true, true);
+//
+//            CategoryPlot p = chart.getCategoryPlot();
+//            p.setRangeGridlinePaint(Color.BLACK);
+//
+//            ChartPanel chartPanel = new ChartPanel(chart);
+//            chartPanel.setPreferredSize(new Dimension(jPaneldays.getWidth(), 321));
+//            jPaneldays.removeAll();
+//            jPaneldays.setLayout(new CardLayout());
+//            jPaneldays.add(chartPanel);
+//            jPaneldays.validate();
+//            jPaneldays.repaint();
+//
+//            model.setRowCount(0);
+//
+//            try {
+//                String sql = "EXEC result_find ?";
+//                PreparedStatement ps = conn.prepareStatement(sql);
+//                ps.setString(1, btn1.getText());
+//                ps.execute();
+//                ResultSet rs = ps.getResultSet();
+//                while (rs.next()) {
+//                    Vector vector = new Vector();
+//                    vector.add(rs.getString(1));
+//                    vector.add(rs.getString(2));
+//                    vector.add(rs.getString(3));
+//                    vector.add(rs.getString(4));
+//
+//                    model.addRow(vector);
+//                }
+//                tblDays.setModel(model);
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }//GEN-LAST:event_btn1ActionPerformed
 
     private void btn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn2ActionPerformed
         // Bieu do
-        try {
-            String query = "SELECT DAY(NGMUA),SUM(TONGTIEN) FROM HOADON WHERE MONTH(NGMUA) LIKE '2' \n"
-                    + "GROUP BY DAY(NGMUA)";
-            Connection javaconnect = null;
-            JDBCCategoryDataset dataset = new JDBCCategoryDataset(ConnecrDb(), query);
-            JFreeChart chart = ChartFactory.createLineChart("Doanh Thu Ngày", "Ngày", "Số tiền", dataset, PlotOrientation.VERTICAL, false, true, true);
-
-            CategoryPlot p = chart.getCategoryPlot();
-            p.setRangeGridlinePaint(Color.BLACK);
-
-            ChartPanel chartPanel = new ChartPanel(chart);
-            chartPanel.setPreferredSize(new Dimension(jPaneldays.getWidth(), 321));
-            jPaneldays.removeAll();
-            jPaneldays.setLayout(new CardLayout());
-            jPaneldays.add(chartPanel);
-            jPaneldays.validate();
-            jPaneldays.repaint();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        //Bang
-        try {
-            String query = "EXEC result_find ?";
-            PreparedStatement ps = conn.prepareStatement(query);
-            ps.setString(1, btn2.getText());
-            ps.execute();
-            ResultSet rs = ps.getResultSet();
-
-            tblDays.setDropMode(DropMode.ON);
-            while (rs.next()) {
-                Vector vector = new Vector();
-                vector.add(rs.getString(1));
-                vector.add(rs.getString(2));
-                vector.add(rs.getString(3));
-                vector.add(rs.getString(4));
-
-                model.addRow(vector);
-            }
-            tblDays.setModel(model);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            String query = "SELECT DAY(NGMUA),SUM(TONGTIEN) FROM HOADON WHERE MONTH(NGMUA) LIKE '2' \n"
+//                    + "GROUP BY DAY(NGMUA)";
+//            Connection javaconnect = null;
+//            JDBCCategoryDataset dataset = new JDBCCategoryDataset(ConnecrDb(), query);
+//            JFreeChart chart = ChartFactory.createLineChart("Doanh Thu Ngày", "Ngày", "Số tiền", dataset, PlotOrientation.VERTICAL, false, true, true);
+//
+//            CategoryPlot p = chart.getCategoryPlot();
+//            p.setRangeGridlinePaint(Color.BLACK);
+//
+//            ChartPanel chartPanel = new ChartPanel(chart);
+//            chartPanel.setPreferredSize(new Dimension(jPaneldays.getWidth(), 321));
+//            jPaneldays.removeAll();
+//            jPaneldays.setLayout(new CardLayout());
+//            jPaneldays.add(chartPanel);
+//            jPaneldays.validate();
+//            jPaneldays.repaint();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//        //Bang
+//        try {
+//            String query = "EXEC result_find ?";
+//            PreparedStatement ps = conn.prepareStatement(query);
+//            ps.setString(1, btn2.getText());
+//            ps.execute();
+//            ResultSet rs = ps.getResultSet();
+//
+//            tblDays.setDropMode(DropMode.ON);
+//            while (rs.next()) {
+//                Vector vector = new Vector();
+//                vector.add(rs.getString(1));
+//                vector.add(rs.getString(2));
+//                vector.add(rs.getString(3));
+//                vector.add(rs.getString(4));
+//
+//                model.addRow(vector);
+//            }
+//            tblDays.setModel(model);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }//GEN-LAST:event_btn2ActionPerformed
 
     private void btn3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn3ActionPerformed
         // TODO add your handling code here:
-        try {
-            String query = "SELECT DAY(NGMUA),SUM(TONGTIEN) FROM HOADON WHERE MONTH(NGMUA) LIKE '3' \n"
-                    + "GROUP BY DAY(NGMUA)";
-            Connection javaconnect = null;
-            JDBCCategoryDataset dataset = new JDBCCategoryDataset(ConnecrDb(), query);
-            JFreeChart chart = ChartFactory.createLineChart("Doanh Thu Ngày", "Ngày", "Số tiền", dataset, PlotOrientation.VERTICAL, false, true, true);
-
-            CategoryPlot p = chart.getCategoryPlot();
-            p.setRangeGridlinePaint(Color.BLACK);
-
-            ChartPanel chartPanel = new ChartPanel(chart);
-            chartPanel.setPreferredSize(new Dimension(jPaneldays.getWidth(), 321));
-            jPaneldays.removeAll();
-            jPaneldays.setLayout(new CardLayout());
-            jPaneldays.add(chartPanel);
-            jPaneldays.validate();
-            jPaneldays.repaint();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        try {
-            String query = "EXEC result_find ?";
-            PreparedStatement ps = conn.prepareStatement(query);
-            ps.setString(1, btn3.getText());
-            ps.execute();
-            ResultSet rs = ps.getResultSet();
-
-            tblDays.setDropMode(DropMode.ON);
-            while (rs.next()) {
-                Vector vector = new Vector();
-                vector.add(rs.getString(1));
-                vector.add(rs.getString(2));
-                vector.add(rs.getString(3));
-                vector.add(rs.getString(4));
-
-                model.addRow(vector);
-            }
-            tblDays.setModel(model);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            String query = "SELECT DAY(NGMUA),SUM(TONGTIEN) FROM HOADON WHERE MONTH(NGMUA) LIKE '3' \n"
+//                    + "GROUP BY DAY(NGMUA)";
+//            Connection javaconnect = null;
+//            JDBCCategoryDataset dataset = new JDBCCategoryDataset(ConnecrDb(), query);
+//            JFreeChart chart = ChartFactory.createLineChart("Doanh Thu Ngày", "Ngày", "Số tiền", dataset, PlotOrientation.VERTICAL, false, true, true);
+//
+//            CategoryPlot p = chart.getCategoryPlot();
+//            p.setRangeGridlinePaint(Color.BLACK);
+//
+//            ChartPanel chartPanel = new ChartPanel(chart);
+//            chartPanel.setPreferredSize(new Dimension(jPaneldays.getWidth(), 321));
+//            jPaneldays.removeAll();
+//            jPaneldays.setLayout(new CardLayout());
+//            jPaneldays.add(chartPanel);
+//            jPaneldays.validate();
+//            jPaneldays.repaint();
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//        try {
+//            String query = "EXEC result_find ?";
+//            PreparedStatement ps = conn.prepareStatement(query);
+//            ps.setString(1, btn3.getText());
+//            ps.execute();
+//            ResultSet rs = ps.getResultSet();
+//
+//            tblDays.setDropMode(DropMode.ON);
+//            while (rs.next()) {
+//                Vector vector = new Vector();
+//                vector.add(rs.getString(1));
+//                vector.add(rs.getString(2));
+//                vector.add(rs.getString(3));
+//                vector.add(rs.getString(4));
+//
+//                model.addRow(vector);
+//            }
+//            tblDays.setModel(model);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }//GEN-LAST:event_btn3ActionPerformed
 
     private void btn4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn4ActionPerformed
         // TODO add your handling code here:
-        try {
-            String query = "SELECT DAY(NGMUA),SUM(TONGTIEN) FROM HOADON WHERE MONTH(NGMUA) LIKE '4' \n"
-                    + "GROUP BY DAY(NGMUA)";
-            Connection javaconnect = null;
-            JDBCCategoryDataset dataset = new JDBCCategoryDataset(ConnecrDb(), query);
-            JFreeChart chart = ChartFactory.createLineChart("Doanh Thu Ngày", "Ngày", "Số tiền", dataset, PlotOrientation.VERTICAL, false, true, true);
-
-            CategoryPlot p = chart.getCategoryPlot();
-            p.setRangeGridlinePaint(Color.BLACK);
-
-            ChartPanel chartPanel = new ChartPanel(chart);
-            chartPanel.setPreferredSize(new Dimension(jPaneldays.getWidth(), 321));
-            jPaneldays.removeAll();
-            jPaneldays.setLayout(new CardLayout());
-            jPaneldays.add(chartPanel);
-            jPaneldays.validate();
-            jPaneldays.repaint();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        try {
-            String query = "EXEC result_find ?";
-            PreparedStatement ps = conn.prepareStatement(query);
-            ps.setString(1, btn4.getText());
-            ps.execute();
-            ResultSet rs = ps.getResultSet();
-
-            tblDays.setDropMode(DropMode.ON);
-            while (rs.next()) {
-                Vector vector = new Vector();
-                vector.add(rs.getString(1));
-                vector.add(rs.getString(2));
-                vector.add(rs.getString(3));
-                vector.add(rs.getString(4));
-
-                model.addRow(vector);
-            }
-            tblDays.setModel(model);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            String query = "SELECT DAY(NGMUA),SUM(TONGTIEN) FROM HOADON WHERE MONTH(NGMUA) LIKE '4' \n"
+//                    + "GROUP BY DAY(NGMUA)";
+//            Connection javaconnect = null;
+//            JDBCCategoryDataset dataset = new JDBCCategoryDataset(ConnecrDb(), query);
+//            JFreeChart chart = ChartFactory.createLineChart("Doanh Thu Ngày", "Ngày", "Số tiền", dataset, PlotOrientation.VERTICAL, false, true, true);
+//
+//            CategoryPlot p = chart.getCategoryPlot();
+//            p.setRangeGridlinePaint(Color.BLACK);
+//
+//            ChartPanel chartPanel = new ChartPanel(chart);
+//            chartPanel.setPreferredSize(new Dimension(jPaneldays.getWidth(), 321));
+//            jPaneldays.removeAll();
+//            jPaneldays.setLayout(new CardLayout());
+//            jPaneldays.add(chartPanel);
+//            jPaneldays.validate();
+//            jPaneldays.repaint();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//        try {
+//            String query = "EXEC result_find ?";
+//            PreparedStatement ps = conn.prepareStatement(query);
+//            ps.setString(1, btn4.getText());
+//            ps.execute();
+//            ResultSet rs = ps.getResultSet();
+//
+//            tblDays.setDropMode(DropMode.ON);
+//            while (rs.next()) {
+//                Vector vector = new Vector();
+//                vector.add(rs.getString(1));
+//                vector.add(rs.getString(2));
+//                vector.add(rs.getString(3));
+//                vector.add(rs.getString(4));
+//
+//                model.addRow(vector);
+//            }
+//            tblDays.setModel(model);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }//GEN-LAST:event_btn4ActionPerformed
 
     private void btn5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn5ActionPerformed
         // TODO add your handling code here:
-        try {
-            String query = "SELECT DAY(NGMUA),SUM(TONGTIEN) FROM HOADON WHERE MONTH(NGMUA) LIKE '5' \n"
-                    + "GROUP BY DAY(NGMUA)";
-            Connection javaconnect = null;
-            JDBCCategoryDataset dataset = new JDBCCategoryDataset(ConnecrDb(), query);
-            JFreeChart chart = ChartFactory.createLineChart("Doanh Thu Ngày", "Ngày", "Số tiền", dataset, PlotOrientation.VERTICAL, false, true, true);
-
-            CategoryPlot p = chart.getCategoryPlot();
-            p.setRangeGridlinePaint(Color.BLACK);
-
-            ChartPanel chartPanel = new ChartPanel(chart);
-            chartPanel.setPreferredSize(new Dimension(jPaneldays.getWidth(), 321));
-            jPaneldays.removeAll();
-            jPaneldays.setLayout(new CardLayout());
-            jPaneldays.add(chartPanel);
-            jPaneldays.validate();
-            jPaneldays.repaint();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        try {
-            String query = "EXEC result_find ?";
-            PreparedStatement ps = conn.prepareStatement(query);
-            ps.setString(1, btn5.getText());
-            ps.execute();
-            ResultSet rs = ps.getResultSet();
-
-            tblDays.setDropMode(DropMode.ON);
-            while (rs.next()) {
-                Vector vector = new Vector();
-                vector.add(rs.getString(1));
-                vector.add(rs.getString(2));
-                vector.add(rs.getString(3));
-                vector.add(rs.getString(4));
-
-                model.addRow(vector);
-            }
-            tblDays.setModel(model);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            String query = "SELECT DAY(NGMUA),SUM(TONGTIEN) FROM HOADON WHERE MONTH(NGMUA) LIKE '5' \n"
+//                    + "GROUP BY DAY(NGMUA)";
+//            Connection javaconnect = null;
+//            JDBCCategoryDataset dataset = new JDBCCategoryDataset(ConnecrDb(), query);
+//            JFreeChart chart = ChartFactory.createLineChart("Doanh Thu Ngày", "Ngày", "Số tiền", dataset, PlotOrientation.VERTICAL, false, true, true);
+//
+//            CategoryPlot p = chart.getCategoryPlot();
+//            p.setRangeGridlinePaint(Color.BLACK);
+//
+//            ChartPanel chartPanel = new ChartPanel(chart);
+//            chartPanel.setPreferredSize(new Dimension(jPaneldays.getWidth(), 321));
+//            jPaneldays.removeAll();
+//            jPaneldays.setLayout(new CardLayout());
+//            jPaneldays.add(chartPanel);
+//            jPaneldays.validate();
+//            jPaneldays.repaint();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        try {
+//            String query = "EXEC result_find ?";
+//            PreparedStatement ps = conn.prepareStatement(query);
+//            ps.setString(1, btn5.getText());
+//            ps.execute();
+//            ResultSet rs = ps.getResultSet();
+//
+//            tblDays.setDropMode(DropMode.ON);
+//            while (rs.next()) {
+//                Vector vector = new Vector();
+//                vector.add(rs.getString(1));
+//                vector.add(rs.getString(2));
+//                vector.add(rs.getString(3));
+//                vector.add(rs.getString(4));
+//
+//                model.addRow(vector);
+//            }
+//            tblDays.setModel(model);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }//GEN-LAST:event_btn5ActionPerformed
 
     private void btn6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn6ActionPerformed
         // TODO add your handling code here:
-        try {
-            String query = "SELECT DAY(NGMUA),SUM(TONGTIEN) FROM HOADON WHERE MONTH(NGMUA) LIKE '6' \n"
-                    + "GROUP BY DAY(NGMUA)";
-            Connection javaconnect = null;
-            JDBCCategoryDataset dataset = new JDBCCategoryDataset(ConnecrDb(), query);
-            JFreeChart chart = ChartFactory.createLineChart("Doanh Thu Ngày", "Ngày", "Số tiền", dataset, PlotOrientation.VERTICAL, false, true, true);
-
-            CategoryPlot p = chart.getCategoryPlot();
-            p.setRangeGridlinePaint(Color.BLACK);
-
-            ChartPanel chartPanel = new ChartPanel(chart);
-            chartPanel.setPreferredSize(new Dimension(jPaneldays.getWidth(), 321));
-            jPaneldays.removeAll();
-            jPaneldays.setLayout(new CardLayout());
-            jPaneldays.add(chartPanel);
-            jPaneldays.validate();
-            jPaneldays.repaint();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        try {
-            String query = "EXEC result_find ?";
-            PreparedStatement ps = conn.prepareStatement(query);
-            ps.setString(1, btn6.getText());
-            ps.execute();
-            ResultSet rs = ps.getResultSet();
-
-            tblDays.setDropMode(DropMode.ON);
-            while (rs.next()) {
-                Vector vector = new Vector();
-                vector.add(rs.getString(1));
-                vector.add(rs.getString(2));
-                vector.add(rs.getString(3));
-                vector.add(rs.getString(4));
-
-                model.addRow(vector);
-            }
-            tblDays.setModel(model);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            String query = "SELECT DAY(NGMUA),SUM(TONGTIEN) FROM HOADON WHERE MONTH(NGMUA) LIKE '6' \n"
+//                    + "GROUP BY DAY(NGMUA)";
+//            Connection javaconnect = null;
+//            JDBCCategoryDataset dataset = new JDBCCategoryDataset(ConnecrDb(), query);
+//            JFreeChart chart = ChartFactory.createLineChart("Doanh Thu Ngày", "Ngày", "Số tiền", dataset, PlotOrientation.VERTICAL, false, true, true);
+//
+//            CategoryPlot p = chart.getCategoryPlot();
+//            p.setRangeGridlinePaint(Color.BLACK);
+//
+//            ChartPanel chartPanel = new ChartPanel(chart);
+//            chartPanel.setPreferredSize(new Dimension(jPaneldays.getWidth(), 321));
+//            jPaneldays.removeAll();
+//            jPaneldays.setLayout(new CardLayout());
+//            jPaneldays.add(chartPanel);
+//            jPaneldays.validate();
+//            jPaneldays.repaint();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        try {
+//            String query = "EXEC result_find ?";
+//            PreparedStatement ps = conn.prepareStatement(query);
+//            ps.setString(1, btn6.getText());
+//            ps.execute();
+//            ResultSet rs = ps.getResultSet();
+//
+//            tblDays.setDropMode(DropMode.ON);
+//            while (rs.next()) {
+//                Vector vector = new Vector();
+//                vector.add(rs.getString(1));
+//                vector.add(rs.getString(2));
+//                vector.add(rs.getString(3));
+//                vector.add(rs.getString(4));
+//
+//                model.addRow(vector);
+//            }
+//            tblDays.setModel(model);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }//GEN-LAST:event_btn6ActionPerformed
 
     private void btn7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn7ActionPerformed
         // TODO add your handling code here:
-        try {
-            String query = "SELECT DAY(NGMUA),SUM(TONGTIEN) FROM HOADON WHERE MONTH(NGMUA) LIKE '7' \n"
-                    + "GROUP BY DAY(NGMUA)";
-            Connection javaconnect = null;
-            JDBCCategoryDataset dataset = new JDBCCategoryDataset(ConnecrDb(), query);
-            JFreeChart chart = ChartFactory.createLineChart("Doanh Thu Ngày", "Ngày", "Số tiền", dataset, PlotOrientation.VERTICAL, false, true, true);
-
-            CategoryPlot p = chart.getCategoryPlot();
-            p.setRangeGridlinePaint(Color.BLACK);
-
-            ChartPanel chartPanel = new ChartPanel(chart);
-            chartPanel.setPreferredSize(new Dimension(jPaneldays.getWidth(), 321));
-            jPaneldays.removeAll();
-            jPaneldays.setLayout(new CardLayout());
-            jPaneldays.add(chartPanel);
-            jPaneldays.validate();
-            jPaneldays.repaint();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        try {
-            String query = "EXEC result_find ?";
-            PreparedStatement ps = conn.prepareStatement(query);
-            ps.setString(1, btn7.getText());
-            ps.execute();
-            ResultSet rs = ps.getResultSet();
-
-            tblDays.setDropMode(DropMode.ON);
-            while (rs.next()) {
-                Vector vector = new Vector();
-                vector.add(rs.getString(1));
-                vector.add(rs.getString(2));
-                vector.add(rs.getString(3));
-                vector.add(rs.getString(4));
-
-                model.addRow(vector);
-            }
-            tblDays.setModel(model);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            String query = "SELECT DAY(NGMUA),SUM(TONGTIEN) FROM HOADON WHERE MONTH(NGMUA) LIKE '7' \n"
+//                    + "GROUP BY DAY(NGMUA)";
+//            Connection javaconnect = null;
+//            JDBCCategoryDataset dataset = new JDBCCategoryDataset(ConnecrDb(), query);
+//            JFreeChart chart = ChartFactory.createLineChart("Doanh Thu Ngày", "Ngày", "Số tiền", dataset, PlotOrientation.VERTICAL, false, true, true);
+//
+//            CategoryPlot p = chart.getCategoryPlot();
+//            p.setRangeGridlinePaint(Color.BLACK);
+//
+//            ChartPanel chartPanel = new ChartPanel(chart);
+//            chartPanel.setPreferredSize(new Dimension(jPaneldays.getWidth(), 321));
+//            jPaneldays.removeAll();
+//            jPaneldays.setLayout(new CardLayout());
+//            jPaneldays.add(chartPanel);
+//            jPaneldays.validate();
+//            jPaneldays.repaint();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//        try {
+//            String query = "EXEC result_find ?";
+//            PreparedStatement ps = conn.prepareStatement(query);
+//            ps.setString(1, btn7.getText());
+//            ps.execute();
+//            ResultSet rs = ps.getResultSet();
+//
+//            tblDays.setDropMode(DropMode.ON);
+//            while (rs.next()) {
+//                Vector vector = new Vector();
+//                vector.add(rs.getString(1));
+//                vector.add(rs.getString(2));
+//                vector.add(rs.getString(3));
+//                vector.add(rs.getString(4));
+//
+//                model.addRow(vector);
+//            }
+//            tblDays.setModel(model);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }//GEN-LAST:event_btn7ActionPerformed
 
     private void btn8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn8ActionPerformed
         // TODO add your handling code here:
-        try {
-            String query = "SELECT DAY(NGMUA),SUM(TONGTIEN) FROM HOADON WHERE MONTH(NGMUA) LIKE '8' \n"
-                    + "GROUP BY DAY(NGMUA)";
-            Connection javaconnect = null;
-            JDBCCategoryDataset dataset = new JDBCCategoryDataset(ConnecrDb(), query);
-            JFreeChart chart = ChartFactory.createLineChart("Doanh Thu Ngày", "Ngày", "Số tiền", dataset, PlotOrientation.VERTICAL, false, true, true);
-
-            CategoryPlot p = chart.getCategoryPlot();
-            p.setRangeGridlinePaint(Color.BLACK);
-
-            ChartPanel chartPanel = new ChartPanel(chart);
-            chartPanel.setPreferredSize(new Dimension(jPaneldays.getWidth(), 321));
-            jPaneldays.removeAll();
-            jPaneldays.setLayout(new CardLayout());
-            jPaneldays.add(chartPanel);
-            jPaneldays.validate();
-            jPaneldays.repaint();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        try {
-            String query = "EXEC result_find ?";
-            PreparedStatement ps = conn.prepareStatement(query);
-            ps.setString(1, btn8.getText());
-            ps.execute();
-            ResultSet rs = ps.getResultSet();
-
-            model.setRowCount(0);
-            //            while (rs.next()) {
-            //                Vector vector = new Vector();
-            //                vector.add(rs.getString("DAY(HDCT.NGAYMUA)"));
-            //                vector.add(rs.getString());
-            //                vector.add(rs.getString());
-            //                vector.add(rs.getString());
-            //
-            //                model.addRow(vector);
-            //            }
-            tblDays.setModel(model);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            String query = "SELECT DAY(NGMUA),SUM(TONGTIEN) FROM HOADON WHERE MONTH(NGMUA) LIKE '8' \n"
+//                    + "GROUP BY DAY(NGMUA)";
+//            Connection javaconnect = null;
+//            JDBCCategoryDataset dataset = new JDBCCategoryDataset(ConnecrDb(), query);
+//            JFreeChart chart = ChartFactory.createLineChart("Doanh Thu Ngày", "Ngày", "Số tiền", dataset, PlotOrientation.VERTICAL, false, true, true);
+//
+//            CategoryPlot p = chart.getCategoryPlot();
+//            p.setRangeGridlinePaint(Color.BLACK);
+//
+//            ChartPanel chartPanel = new ChartPanel(chart);
+//            chartPanel.setPreferredSize(new Dimension(jPaneldays.getWidth(), 321));
+//            jPaneldays.removeAll();
+//            jPaneldays.setLayout(new CardLayout());
+//            jPaneldays.add(chartPanel);
+//            jPaneldays.validate();
+//            jPaneldays.repaint();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        try {
+//            String query = "EXEC result_find ?";
+//            PreparedStatement ps = conn.prepareStatement(query);
+//            ps.setString(1, btn8.getText());
+//            ps.execute();
+//            ResultSet rs = ps.getResultSet();
+//
+//            model.setRowCount(0);
+//            //            while (rs.next()) {
+//            //                Vector vector = new Vector();
+//            //                vector.add(rs.getString("DAY(HDCT.NGAYMUA)"));
+//            //                vector.add(rs.getString());
+//            //                vector.add(rs.getString());
+//            //                vector.add(rs.getString());
+//            //
+//            //                model.addRow(vector);
+//            //            }
+//            tblDays.setModel(model);
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }//GEN-LAST:event_btn8ActionPerformed
 
     private void btn9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn9ActionPerformed
         // TODO add your handling code here:
-        try {
-            String query = "SELECT DAY(NGMUA),SUM(TONGTIEN) FROM HOADON WHERE MONTH(NGMUA) LIKE '9' \n"
-                    + "GROUP BY DAY(NGMUA)";
-            Connection javaconnect = null;
-            JDBCCategoryDataset dataset = new JDBCCategoryDataset(ConnecrDb(), query);
-            JFreeChart chart = ChartFactory.createLineChart("Doanh Thu Ngày", "Ngày", "Số tiền", dataset, PlotOrientation.VERTICAL, false, true, true);
-
-            CategoryPlot p = chart.getCategoryPlot();
-            p.setRangeGridlinePaint(Color.BLACK);
-
-            ChartPanel chartPanel = new ChartPanel(chart);
-            chartPanel.setPreferredSize(new Dimension(jPaneldays.getWidth(), 321));
-            jPaneldays.removeAll();
-            jPaneldays.setLayout(new CardLayout());
-            jPaneldays.add(chartPanel);
-            jPaneldays.validate();
-            jPaneldays.repaint();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        try {
-            String query = "EXEC result_find ?";
-            PreparedStatement ps = conn.prepareStatement(query);
-            ps.setString(1, btn9.getText());
-            ps.execute();
-            ResultSet rs = ps.getResultSet();
-
-            tblDays.setDropMode(DropMode.ON);
-            while (rs.next()) {
-                Vector vector = new Vector();
-                vector.add(rs.getString(1));
-                vector.add(rs.getString(2));
-                vector.add(rs.getString(3));
-                vector.add(rs.getString(4));
-
-                model.addRow(vector);
-            }
-            tblDays.setModel(model);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            String query = "SELECT DAY(NGMUA),SUM(TONGTIEN) FROM HOADON WHERE MONTH(NGMUA) LIKE '9' \n"
+//                    + "GROUP BY DAY(NGMUA)";
+//            Connection javaconnect = null;
+//            JDBCCategoryDataset dataset = new JDBCCategoryDataset(ConnecrDb(), query);
+//            JFreeChart chart = ChartFactory.createLineChart("Doanh Thu Ngày", "Ngày", "Số tiền", dataset, PlotOrientation.VERTICAL, false, true, true);
+//
+//            CategoryPlot p = chart.getCategoryPlot();
+//            p.setRangeGridlinePaint(Color.BLACK);
+//
+//            ChartPanel chartPanel = new ChartPanel(chart);
+//            chartPanel.setPreferredSize(new Dimension(jPaneldays.getWidth(), 321));
+//            jPaneldays.removeAll();
+//            jPaneldays.setLayout(new CardLayout());
+//            jPaneldays.add(chartPanel);
+//            jPaneldays.validate();
+//            jPaneldays.repaint();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        try {
+//            String query = "EXEC result_find ?";
+//            PreparedStatement ps = conn.prepareStatement(query);
+//            ps.setString(1, btn9.getText());
+//            ps.execute();
+//            ResultSet rs = ps.getResultSet();
+//
+//            tblDays.setDropMode(DropMode.ON);
+//            while (rs.next()) {
+//                Vector vector = new Vector();
+//                vector.add(rs.getString(1));
+//                vector.add(rs.getString(2));
+//                vector.add(rs.getString(3));
+//                vector.add(rs.getString(4));
+//
+//                model.addRow(vector);
+//            }
+//            tblDays.setModel(model);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }//GEN-LAST:event_btn9ActionPerformed
 
     private void btn10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn10ActionPerformed
         // TODO add your handling code here:
-        try {
-            String query = "SELECT DAY(NGMUA),SUM(TONGTIEN) FROM HOADON WHERE MONTH(NGMUA) LIKE '10' \n"
-                    + "GROUP BY DAY(NGMUA)";
-            Connection javaconnect = null;
-            JDBCCategoryDataset dataset = new JDBCCategoryDataset(ConnecrDb(), query);
-            JFreeChart chart = ChartFactory.createLineChart("Doanh Thu Ngày", "Ngày", "Số tiền", dataset, PlotOrientation.VERTICAL, false, true, true);
-
-            CategoryPlot p = chart.getCategoryPlot();
-            p.setRangeGridlinePaint(Color.BLACK);
-
-            ChartPanel chartPanel = new ChartPanel(chart);
-            chartPanel.setPreferredSize(new Dimension(jPaneldays.getWidth(), 321));
-            jPaneldays.removeAll();
-            jPaneldays.setLayout(new CardLayout());
-            jPaneldays.add(chartPanel);
-            jPaneldays.validate();
-            jPaneldays.repaint();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        try {
-            String query = "EXEC result_find ?";
-            PreparedStatement ps = conn.prepareStatement(query);
-            ps.setString(1, btn10.getText());
-            ps.execute();
-            ResultSet rs = ps.getResultSet();
-
-            tblDays.setDropMode(DropMode.ON);
-            while (rs.next()) {
-                Vector vector = new Vector();
-                vector.add(rs.getString(1));
-                vector.add(rs.getString(2));
-                vector.add(rs.getString(3));
-                vector.add(rs.getString(4));
-
-                model.addRow(vector);
-            }
-            tblDays.setModel(model);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            String query = "SELECT DAY(NGMUA),SUM(TONGTIEN) FROM HOADON WHERE MONTH(NGMUA) LIKE '10' \n"
+//                    + "GROUP BY DAY(NGMUA)";
+//            Connection javaconnect = null;
+//            JDBCCategoryDataset dataset = new JDBCCategoryDataset(ConnecrDb(), query);
+//            JFreeChart chart = ChartFactory.createLineChart("Doanh Thu Ngày", "Ngày", "Số tiền", dataset, PlotOrientation.VERTICAL, false, true, true);
+//
+//            CategoryPlot p = chart.getCategoryPlot();
+//            p.setRangeGridlinePaint(Color.BLACK);
+//
+//            ChartPanel chartPanel = new ChartPanel(chart);
+//            chartPanel.setPreferredSize(new Dimension(jPaneldays.getWidth(), 321));
+//            jPaneldays.removeAll();
+//            jPaneldays.setLayout(new CardLayout());
+//            jPaneldays.add(chartPanel);
+//            jPaneldays.validate();
+//            jPaneldays.repaint();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//        try {
+//            String query = "EXEC result_find ?";
+//            PreparedStatement ps = conn.prepareStatement(query);
+//            ps.setString(1, btn10.getText());
+//            ps.execute();
+//            ResultSet rs = ps.getResultSet();
+//
+//            tblDays.setDropMode(DropMode.ON);
+//            while (rs.next()) {
+//                Vector vector = new Vector();
+//                vector.add(rs.getString(1));
+//                vector.add(rs.getString(2));
+//                vector.add(rs.getString(3));
+//                vector.add(rs.getString(4));
+//
+//                model.addRow(vector);
+//            }
+//            tblDays.setModel(model);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }//GEN-LAST:event_btn10ActionPerformed
 
     private void btn11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn11ActionPerformed
         // TODO add your handling code here:
-        try {
-            String query = "SELECT DAY(NGMUA),SUM(TONGTIEN) FROM HOADON WHERE MONTH(NGMUA) LIKE '11' \n"
-                    + "GROUP BY DAY(NGMUA)";
-            Connection javaconnect = null;
-            JDBCCategoryDataset dataset = new JDBCCategoryDataset(ConnecrDb(), query);
-            JFreeChart chart = ChartFactory.createLineChart("Doanh Thu Ngày", "Ngày", "Số tiền", dataset, PlotOrientation.VERTICAL, false, true, true);
-
-            CategoryPlot p = chart.getCategoryPlot();
-            p.setRangeGridlinePaint(Color.BLACK);
-
-            ChartPanel chartPanel = new ChartPanel(chart);
-            chartPanel.setPreferredSize(new Dimension(jPaneldays.getWidth(), 321));
-            jPaneldays.removeAll();
-            jPaneldays.setLayout(new CardLayout());
-            jPaneldays.add(chartPanel);
-            jPaneldays.validate();
-            jPaneldays.repaint();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        try {
-            String query = "EXEC result_find ?";
-            PreparedStatement ps = conn.prepareStatement(query);
-            ps.setString(1, btn11.getText());
-            ps.execute();
-            ResultSet rs = ps.getResultSet();
-
-            tblDays.setDropMode(DropMode.ON);
-            while (rs.next()) {
-                Vector vector = new Vector();
-                vector.add(rs.getString(1));
-                vector.add(rs.getString(2));
-                vector.add(rs.getString(3));
-                vector.add(rs.getString(4));
-
-                model.addRow(vector);
-            }
-            tblDays.setModel(model);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            String query = "SELECT DAY(NGMUA),SUM(TONGTIEN) FROM HOADON WHERE MONTH(NGMUA) LIKE '11' \n"
+//                    + "GROUP BY DAY(NGMUA)";
+//            Connection javaconnect = null;
+//            JDBCCategoryDataset dataset = new JDBCCategoryDataset(ConnecrDb(), query);
+//            JFreeChart chart = ChartFactory.createLineChart("Doanh Thu Ngày", "Ngày", "Số tiền", dataset, PlotOrientation.VERTICAL, false, true, true);
+//
+//            CategoryPlot p = chart.getCategoryPlot();
+//            p.setRangeGridlinePaint(Color.BLACK);
+//
+//            ChartPanel chartPanel = new ChartPanel(chart);
+//            chartPanel.setPreferredSize(new Dimension(jPaneldays.getWidth(), 321));
+//            jPaneldays.removeAll();
+//            jPaneldays.setLayout(new CardLayout());
+//            jPaneldays.add(chartPanel);
+//            jPaneldays.validate();
+//            jPaneldays.repaint();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//        try {
+//            String query = "EXEC result_find ?";
+//            PreparedStatement ps = conn.prepareStatement(query);
+//            ps.setString(1, btn11.getText());
+//            ps.execute();
+//            ResultSet rs = ps.getResultSet();
+//
+//            tblDays.setDropMode(DropMode.ON);
+//            while (rs.next()) {
+//                Vector vector = new Vector();
+//                vector.add(rs.getString(1));
+//                vector.add(rs.getString(2));
+//                vector.add(rs.getString(3));
+//                vector.add(rs.getString(4));
+//
+//                model.addRow(vector);
+//            }
+//            tblDays.setModel(model);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }//GEN-LAST:event_btn11ActionPerformed
 
     private void btn12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn12ActionPerformed
         // TODO add your handling code here:
-        try {
-            String query = "SELECT DAY(NGMUA),SUM(TONGTIEN) FROM HOADON WHERE MONTH(NGMUA) LIKE '12' \n"
-                    + "GROUP BY DAY(NGMUA)";
-            Connection javaconnect = null;
-            JDBCCategoryDataset dataset = new JDBCCategoryDataset(ConnecrDb(), query);
-            JFreeChart chart = ChartFactory.createLineChart("Doanh Thu Ngày", "Ngày", "Số tiền", dataset, PlotOrientation.VERTICAL, false, true, true);
-
-            CategoryPlot p = chart.getCategoryPlot();
-            p.setRangeGridlinePaint(Color.BLACK);
-
-            ChartPanel chartPanel = new ChartPanel(chart);
-            chartPanel.setPreferredSize(new Dimension(jPaneldays.getWidth(), 321));
-            jPaneldays.removeAll();
-            jPaneldays.setLayout(new CardLayout());
-            jPaneldays.add(chartPanel);
-            jPaneldays.validate();
-            jPaneldays.repaint();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        try {
-            String query = "EXEC result_find ?";
-            PreparedStatement ps = conn.prepareStatement(query);
-            ps.setString(1, btn12.getText());
-            ps.execute();
-            ResultSet rs = ps.getResultSet();
-
-            tblDays.setDropMode(DropMode.ON);
-            while (rs.next()) {
-                Vector vector = new Vector();
-                vector.add(rs.getString(1));
-                vector.add(rs.getString(2));
-                vector.add(rs.getString(3));
-                vector.add(rs.getString(4));
-
-                model.addRow(vector);
-            }
-            tblDays.setModel(model);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            String query = "SELECT DAY(NGMUA),SUM(TONGTIEN) FROM HOADON WHERE MONTH(NGMUA) LIKE '12' \n"
+//                    + "GROUP BY DAY(NGMUA)";
+//            Connection javaconnect = null;
+//            JDBCCategoryDataset dataset = new JDBCCategoryDataset(ConnecrDb(), query);
+//            JFreeChart chart = ChartFactory.createLineChart("Doanh Thu Ngày", "Ngày", "Số tiền", dataset, PlotOrientation.VERTICAL, false, true, true);
+//
+//            CategoryPlot p = chart.getCategoryPlot();
+//            p.setRangeGridlinePaint(Color.BLACK);
+//
+//            ChartPanel chartPanel = new ChartPanel(chart);
+//            chartPanel.setPreferredSize(new Dimension(jPaneldays.getWidth(), 321));
+//            jPaneldays.removeAll();
+//            jPaneldays.setLayout(new CardLayout());
+//            jPaneldays.add(chartPanel);
+//            jPaneldays.validate();
+//            jPaneldays.repaint();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//        try {
+//            String query = "EXEC result_find ?";
+//            PreparedStatement ps = conn.prepareStatement(query);
+//            ps.setString(1, btn12.getText());
+//            ps.execute();
+//            ResultSet rs = ps.getResultSet();
+//
+//            tblDays.setDropMode(DropMode.ON);
+//            while (rs.next()) {
+//                Vector vector = new Vector();
+//                vector.add(rs.getString(1));
+//                vector.add(rs.getString(2));
+//                vector.add(rs.getString(3));
+//                vector.add(rs.getString(4));
+//
+//                model.addRow(vector);
+//            }
+//            tblDays.setModel(model);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }//GEN-LAST:event_btn12ActionPerformed
 
     private void btnt2018ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnt2018ActionPerformed
         // TODO add your handling code here:
-        try {
-            String query = "SELECT MONTH(NGMUA),SUM(TONGTIEN) FROM HOADON WHERE YEAR(NGMUA) LIKE '2018' \n"
-                    + "GROUP BY MONTH(NGMUA)";
-            Connection javaconnect = null;
-            JDBCCategoryDataset dataset = new JDBCCategoryDataset(ConnecrDb(), query);
-            JFreeChart chart = ChartFactory.createLineChart("Doanh Thu Tháng", "Tháng", "Số tiền", dataset, PlotOrientation.VERTICAL, false, true, true);
-
-            CategoryPlot p = chart.getCategoryPlot();
-            p.setRangeGridlinePaint(Color.BLACK);
-
-            ChartPanel chartPanel = new ChartPanel(chart);
-            chartPanel.setPreferredSize(new Dimension(jPanelThang.getWidth(), 321));
-            jPanelThang.removeAll();
-            jPanelThang.setLayout(new CardLayout());
-            jPanelThang.add(chartPanel);
-            jPanelThang.validate();
-            jPanelThang.repaint();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            String query = "SELECT MONTH(NGMUA),SUM(TONGTIEN) FROM HOADON WHERE YEAR(NGMUA) LIKE '2018' \n"
+//                    + "GROUP BY MONTH(NGMUA)";
+//            Connection javaconnect = null;
+//            JDBCCategoryDataset dataset = new JDBCCategoryDataset(ConnecrDb(), query);
+//            JFreeChart chart = ChartFactory.createLineChart("Doanh Thu Tháng", "Tháng", "Số tiền", dataset, PlotOrientation.VERTICAL, false, true, true);
+//
+//            CategoryPlot p = chart.getCategoryPlot();
+//            p.setRangeGridlinePaint(Color.BLACK);
+//
+//            ChartPanel chartPanel = new ChartPanel(chart);
+//            chartPanel.setPreferredSize(new Dimension(jPanelThang.getWidth(), 321));
+//            jPanelThang.removeAll();
+//            jPanelThang.setLayout(new CardLayout());
+//            jPanelThang.add(chartPanel);
+//            jPanelThang.validate();
+//            jPanelThang.repaint();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }//GEN-LAST:event_btnt2018ActionPerformed
 
     private void btnt2019ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnt2019ActionPerformed
         // TODO add your handling code here:
-        try {
-            String query = "SELECT MONTH(NGMUA),SUM(TONGTIEN) FROM HOADON WHERE YEAR(NGMUA) LIKE '2019' \n"
-                    + "GROUP BY MONTH(NGMUA)";
-            Connection javaconnect = null;
-            JDBCCategoryDataset dataset = new JDBCCategoryDataset(ConnecrDb(), query);
-            JFreeChart chart = ChartFactory.createLineChart("Doanh Thu Tháng", "Tháng", "Số tiền", dataset, PlotOrientation.VERTICAL, false, true, true);
-            CategoryPlot p = chart.getCategoryPlot();
-            p.setRangeGridlinePaint(Color.BLACK);
-
-            ChartPanel chartPanel = new ChartPanel(chart);
-            chartPanel.setPreferredSize(new Dimension(jPanelThang.getWidth(), 321));
-            jPanelThang.removeAll();
-            jPanelThang.setLayout(new CardLayout());
-            jPanelThang.add(chartPanel);
-            jPanelThang.validate();
-            jPanelThang.repaint();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            String query = "SELECT MONTH(NGMUA),SUM(TONGTIEN) FROM HOADON WHERE YEAR(NGMUA) LIKE '2019' \n"
+//                    + "GROUP BY MONTH(NGMUA)";
+//            Connection javaconnect = null;
+//            JDBCCategoryDataset dataset = new JDBCCategoryDataset(ConnecrDb(), query);
+//            JFreeChart chart = ChartFactory.createLineChart("Doanh Thu Tháng", "Tháng", "Số tiền", dataset, PlotOrientation.VERTICAL, false, true, true);
+//            CategoryPlot p = chart.getCategoryPlot();
+//            p.setRangeGridlinePaint(Color.BLACK);
+//
+//            ChartPanel chartPanel = new ChartPanel(chart);
+//            chartPanel.setPreferredSize(new Dimension(jPanelThang.getWidth(), 321));
+//            jPanelThang.removeAll();
+//            jPanelThang.setLayout(new CardLayout());
+//            jPanelThang.add(chartPanel);
+//            jPanelThang.validate();
+//            jPanelThang.repaint();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }//GEN-LAST:event_btnt2019ActionPerformed
 
     private void btnt2020ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnt2020ActionPerformed
         // TODO add your handling code here:
-        try {
-            String query = "SELECT MONTH(NGMUA),SUM(TONGTIEN) FROM HOADON WHERE YEAR(NGMUA) LIKE '2020' \n"
-                    + "GROUP BY MONTH(NGMUA)";
-            Connection javaconnect = null;
-            JDBCCategoryDataset dataset = new JDBCCategoryDataset(ConnecrDb(), query);
-            JFreeChart chart = ChartFactory.createLineChart("Doanh Thu Tháng", "Tháng", "Số tiền", dataset, PlotOrientation.VERTICAL, false, true, true);
-            CategoryPlot p = chart.getCategoryPlot();
-            p.setRangeGridlinePaint(Color.BLACK);
-
-            ChartPanel chartPanel = new ChartPanel(chart);
-            chartPanel.setPreferredSize(new Dimension(jPanelThang.getWidth(), 321));
-            jPanelThang.removeAll();
-            jPanelThang.setLayout(new CardLayout());
-            jPanelThang.add(chartPanel);
-            jPanelThang.validate();
-            jPanelThang.repaint();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            String query = "SELECT MONTH(NGMUA),SUM(TONGTIEN) FROM HOADON WHERE YEAR(NGMUA) LIKE '2020' \n"
+//                    + "GROUP BY MONTH(NGMUA)";
+//            Connection javaconnect = null;
+//            JDBCCategoryDataset dataset = new JDBCCategoryDataset(ConnecrDb(), query);
+//            JFreeChart chart = ChartFactory.createLineChart("Doanh Thu Tháng", "Tháng", "Số tiền", dataset, PlotOrientation.VERTICAL, false, true, true);
+//            CategoryPlot p = chart.getCategoryPlot();
+//            p.setRangeGridlinePaint(Color.BLACK);
+//
+//            ChartPanel chartPanel = new ChartPanel(chart);
+//            chartPanel.setPreferredSize(new Dimension(jPanelThang.getWidth(), 321));
+//            jPanelThang.removeAll();
+//            jPanelThang.setLayout(new CardLayout());
+//            jPanelThang.add(chartPanel);
+//            jPanelThang.validate();
+//            jPanelThang.repaint();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }//GEN-LAST:event_btnt2020ActionPerformed
 
     private void btnt2021ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnt2021ActionPerformed
         // TODO add your handling code here:
-        try {
-            String query = "SELECT MONTH(NGMUA),SUM(TONGTIEN) FROM HOADON WHERE YEAR(NGMUA) LIKE '2021' \n"
-                    + "GROUP BY MONTH(NGMUA)";
-            Connection javaconnect = null;
-            JDBCCategoryDataset dataset = new JDBCCategoryDataset(ConnecrDb(), query);
-            JFreeChart chart = ChartFactory.createLineChart("Doanh Thu Tháng", "Tháng", "Số tiền", dataset, PlotOrientation.VERTICAL, false, true, true);
-            CategoryPlot p = chart.getCategoryPlot();
-            p.setRangeGridlinePaint(Color.BLACK);
-
-            ChartPanel chartPanel = new ChartPanel(chart);
-            chartPanel.setPreferredSize(new Dimension(jPanelThang.getWidth(), 321));
-            jPanelThang.removeAll();
-            jPanelThang.setLayout(new CardLayout());
-            jPanelThang.add(chartPanel);
-            jPanelThang.validate();
-            jPanelThang.repaint();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            String query = "SELECT MONTH(NGMUA),SUM(TONGTIEN) FROM HOADON WHERE YEAR(NGMUA) LIKE '2021' \n"
+//                    + "GROUP BY MONTH(NGMUA)";
+//            Connection javaconnect = null;
+//            JDBCCategoryDataset dataset = new JDBCCategoryDataset(ConnecrDb(), query);
+//            JFreeChart chart = ChartFactory.createLineChart("Doanh Thu Tháng", "Tháng", "Số tiền", dataset, PlotOrientation.VERTICAL, false, true, true);
+//            CategoryPlot p = chart.getCategoryPlot();
+//            p.setRangeGridlinePaint(Color.BLACK);
+//
+//            ChartPanel chartPanel = new ChartPanel(chart);
+//            chartPanel.setPreferredSize(new Dimension(jPanelThang.getWidth(), 321));
+//            jPanelThang.removeAll();
+//            jPanelThang.setLayout(new CardLayout());
+//            jPanelThang.add(chartPanel);
+//            jPanelThang.validate();
+//            jPanelThang.repaint();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }//GEN-LAST:event_btnt2021ActionPerformed
 
 
