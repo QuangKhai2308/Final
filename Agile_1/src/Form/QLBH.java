@@ -1276,7 +1276,7 @@ public class QLBH extends javax.swing.JInternalFrame {
     }
 
     protected void fetchMaSP() {
-        String query = "SELECT * FROM SANPHAM";
+        String query = "SELECT * FROM SANPHAM WHERE TRANGTHAI LIKE (N'Đã về')";
         List<Object> list = new ArrayList<>();
         try {
             PreparedStatement ps = conn.prepareStatement(query);

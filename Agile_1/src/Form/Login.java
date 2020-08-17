@@ -21,6 +21,7 @@ import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 import javax.swing.border.MatteBorder;
+import main.main;
 
 /**
  *
@@ -335,9 +336,10 @@ public class Login extends javax.swing.JInternalFrame {
 //                menu_BH.pack();
                 menu_BH.setVisible(true);
                 menu_BH.setLocation(this.getDesktopPane().getWidth() / 2 - menu_BH.getWidth() / 2, (this.getDesktopPane().getHeight()) / 2 - menu_BH.getHeight() / 2);
-
+                
                 this.dispose();
-
+                main.jMenu3.setEnabled(true);
+                main.jMenu1.setEnabled(true);
 //                System.out.println(pos);
             } else {
                 JOptionPane.showMessageDialog(this, "Invalid User / Password", "Login Error", JOptionPane.ERROR_MESSAGE);

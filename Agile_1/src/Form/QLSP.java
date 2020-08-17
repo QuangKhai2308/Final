@@ -810,7 +810,7 @@ public class QLSP extends javax.swing.JInternalFrame {
 
         this.dispose();
     }//GEN-LAST:event_btnCannelActionPerformed
-
+    
     private void tblListSPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblListSPMouseClicked
         // TODO add your handling code here:
 
@@ -819,7 +819,7 @@ public class QLSP extends javax.swing.JInternalFrame {
         try {
             if (index >= 0) {
                 unEditable();
-                txtMaSP.setEditable(false);
+//                txtMaSP.setEditable(false);
                 btnUpdate.setEnabled(true);
                 btnDelete.setEnabled(true);
                 ShowDetails();
@@ -983,7 +983,7 @@ public class QLSP extends javax.swing.JInternalFrame {
     }
 
     private void unEditable() {
-//        txtMaSP.setEditable(true);
+        txtMaSP.setEditable(true);
         txtTenSP.setEditable(true);
         txtGiaTien.setEditable(true);
         cboLoaiSP.setEnabled(true);

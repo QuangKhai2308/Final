@@ -40,6 +40,8 @@ public class main extends javax.swing.JFrame {
         initComponents();
 //        setLocationRelativeTo(null);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
+        jMenu3.setEnabled(false);
+        jMenu1.setEnabled(false);
     }
 
     /**
@@ -316,9 +318,9 @@ public class main extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane Desktop;
-    private javax.swing.JMenu jMenu1;
+    public static javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
+    public static javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
