@@ -353,6 +353,9 @@ public class UpdateHD extends javax.swing.JInternalFrame {
         btnSave = new javax.swing.JButton();
         btnThoat = new javax.swing.JButton();
 
+        setIconifiable(true);
+        setMaximizable(true);
+
         jScrollPane3.setPreferredSize(new java.awt.Dimension(1225, 500));
 
         jPanel1.setBackground(new java.awt.Color(234, 153, 153));

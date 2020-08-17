@@ -734,7 +734,7 @@ public class menu_banhang extends javax.swing.JInternalFrame {
 
     private void btnDTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDTActionPerformed
         // TODO add your handling code here:
-        Quanly_doanhthu qldt = new Quanly_doanhthu();
+        Doanhthu qldt = new Doanhthu();
         this.getDesktopPane().add(qldt);
         qldt.setVisible(true);
         qldt.setLocation(this.getDesktopPane().getWidth() / 2 - qldt.getWidth() / 2, (this.getDesktopPane().getHeight()) / 2 - qldt.getHeight() / 2);

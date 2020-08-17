@@ -57,25 +57,6 @@ public class QLSP extends javax.swing.JInternalFrame {
 
     }
 
-    public QLSP(String MaSP) {
-        initComponents();
-        conn = getConnection();
-        ListSP = fetchList();
-        renderForm(ListSP);
-        int x = 0;
-        for (int i = 0; i < ListSP.size(); i++) {
-            SanPham sp = ListSP.get(i);
-            if (sp.getID_SP().equalsIgnoreCase(MaSP)) {
-                index = i;
-                System.out.println(index);
-                tblListSP.setRowSelectionInterval(index, index);
-                ShowDetails();
-                return;
-            }
-
-        }
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -597,6 +578,25 @@ public class QLSP extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    public QLSP(String MaSP) {
+        initComponents();
+        conn = getConnection();
+        ListSP = fetchList();
+        renderForm(ListSP);
+        int x = 0;
+        for (int i = 0; i < ListSP.size(); i++) {
+            SanPham sp = ListSP.get(i);
+            if (sp.getID_SP().equalsIgnoreCase(MaSP)) {
+                index = i;
+                System.out.println(index);
+                tblListSP.setRowSelectionInterval(index, index);
+                ShowDetails();
+                return;
+            }
+
+        }
+    }
+
     protected void read() {
         String query = "EXEC find_masp ?";
 //        List<SanPham> listsp = new ArrayList<SanPham>();
@@ -711,6 +711,7 @@ public class QLSP extends javax.swing.JInternalFrame {
                 ImageIcon h = new ImageIcon(new_img);
                 lblImage.setIcon(h);
                 txtLinkAnh.setText(ImageName);
+                System.out.println(lblImage.getWidth() + "," + lblImage.getHeight());
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -1100,7 +1101,7 @@ public class QLSP extends javax.swing.JInternalFrame {
         txtSoLuong.setText(sp.getSoLuong() + "");
         cboTrangThai.setSelectedItem(sp.getTrangThai());
         txtLinkAnh.setText(sp.getImage());
-        lblImage.setIcon(new ImageIcon(new ImageIcon(sp.getImage()).getImage().getScaledInstance(this.getWidth(), this.getHeight(), Image.SCALE_SMOOTH)));
+        lblImage.setIcon(new ImageIcon(new ImageIcon(sp.getImage()).getImage().getScaledInstance(200, 240, Image.SCALE_SMOOTH)));
         txtTenSP.setEditable(true);
         dateNhap.setEnabled(true);
         txtGiaTien.setEditable(true);

@@ -102,7 +102,6 @@ public class thongtin_hoadon extends javax.swing.JInternalFrame {
         });
         SelectTable.add(Delete);
 
-        setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
 

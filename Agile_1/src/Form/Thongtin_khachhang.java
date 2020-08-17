@@ -163,7 +163,6 @@ public class Thongtin_khachhang extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
 
